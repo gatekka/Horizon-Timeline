@@ -5,6 +5,21 @@ body {
     background-position: top;
 }
 
+body * {
+    border-radius: 7px;
+}
+
+input {
+    padding: 4px;
+    border: none;
+    outline: none;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
 .flex_column {
     display: flex;
     flex-direction: column;
@@ -39,6 +54,23 @@ body {
     top: 56vh;
     left: 20vw;
     width: 25vw;
+    max-width: 320px;
+}
+
+.point_data input, button {
+    background-color: #d4d38d;
+}
+
+.point_data .submit_button {
+    padding: 4px 0px;
+}
+
+.point_data .submit_button:active {
+    background-color: #868658;
+}
+
+.point_data .description {
+    height: 36px;
 }
 
 .line {
