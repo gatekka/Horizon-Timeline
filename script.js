@@ -1,7 +1,9 @@
 var line = document.getElementById("line");
 var defaultcolor = line.style.background;
 var placepoint = document.getElementById("placepoint");
+var point_data = document.getElementById("point_data");
 
+line.addEventListener('mousemove', getPosition);
 
 function getPosition(event) {
     var x = event.pageX; //event.clientX
@@ -11,13 +13,17 @@ function getPosition(event) {
     placepoint.style.left = x + "px";
 }
 
-line.addEventListener('mousemove', getPosition);
-
-line.onmouseover = function placePoint() {
+line.onmouseover = function displayPoint() {
     line.style.background = "#8fD362";
     placepoint.style.opacity = "100%";
 }
-line.onmouseleave = function click() {
+
+line.onclick = function placePoint() {
+    point_data.style.opacity = "100%";
+    console.log("clicked horizon");
+}
+
+line.onmouseleave = function onMouseLeave() {
     line.style.background = defaultcolor;
     placepoint.style.opacity = "0%";
 }

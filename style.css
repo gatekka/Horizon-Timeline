@@ -6,7 +6,12 @@ body {
     background-position: top;
 }
 
-.container {
+.flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
+.line_container {
     /* background-color: grey; */
     /* border: 2px solid red; */
     display: flex;
@@ -14,6 +19,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex: 3;
+    /* justify-content: start; */
 }
 
 .placepoint {
@@ -22,7 +29,20 @@ body {
     padding: 20px 2px;
     position: absolute;
     pointer-events: none;
+    /* opacity: 0%; */
+}
+
+.point_data {
+    padding: 10px 5px 10px 5px;
+    background-color: rgb(179, 179, 113);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vh;
     opacity: 0%;
+    position: absolute;
+    top: 56vh;
+    left: 20vw;
+    width: 25vw;
 }
 
 .line {
