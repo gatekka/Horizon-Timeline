@@ -1,17 +1,16 @@
-var line = document.getElementById("line");
-var defaultcolor = line.style.background;
-var placepoint = document.getElementById("placepoint");
-var point_data = document.getElementById("point_data");
-var line_container = document.getElementById("line_container");
-var submit_button = document.getElementById("submit_button");
-var title_data = document.getElementById("title_data");
-var description_data = document.getElementById("description_data");
+const line = document.getElementById("line");
+const defaultcolor = line.style.background;
+const placepoint = document.getElementById("placepoint");
+const point_data = document.getElementById("point_data");
+const line_container = document.getElementById("line_container");
+const submit_button = document.getElementById("submit_button");
+const title_data = document.getElementById("title_data");
+const description_data = document.getElementById("description_data");
+
 
 document.addEventListener('mousemove', getPosition);
-
 var mousex;
 var mousey;
-
 function getPosition(event) {
     mousex = event.pageX;
     mousey = event.pageY;
@@ -37,11 +36,10 @@ line.onmouseleave = function onMouseLeave() {
     placepoint.style.opacity = "0%";
 }
 
-// TODO: Make it so that pressing 'enter' key while focusing on input boxes also executes 'SubmitData' function
 // FIX: Rework uniqueid. Currently restarts back to 1 after importing from localStorage. Make it random x-length string instead of increasing by 1?
 var dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
 var uniqueid = 1;
-submit_button.onclick = function SubmitData() {
+function SubmitData() {
     var obj = {
         id: uniqueid,
         title: title_data.value,
@@ -49,8 +47,9 @@ submit_button.onclick = function SubmitData() {
     }
     dataStore.push(obj); // stores into array
     localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
-    point_data.style.opacity = "0%";
     uniqueid++;
+
+    point_data.style.opacity = "0%";
 
     // Clearing input boxes
     title_data.value = ""; 
@@ -60,3 +59,19 @@ submit_button.onclick = function SubmitData() {
     // console.log(JSON.stringify(dataStore)); // for logging purposes
     console.log(dataStore); // for logging purposes
 }
+
+submit_button.onclick = SubmitData;
+
+title_data.addEventListener('keydown', (ev) => {
+    if(ev.key == 'Enter') {
+        SubmitData();
+        console.log("pressed enter"); // for logging purposes
+    }
+})
+
+description_data.addEventListener('keydown', (ev) => {
+    if(ev.key == 'Enter') {
+        SubmitData();
+        console.log("pressed enter"); // for logging purposes
+    }
+})
