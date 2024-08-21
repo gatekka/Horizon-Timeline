@@ -4,6 +4,8 @@ var placepoint = document.getElementById("placepoint");
 var point_data = document.getElementById("point_data");
 var line_container = document.getElementById("line_container");
 var submit_button = document.getElementById("submit_button");
+var title_data = document.getElementById("title_data");
+var description_data = document.getElementById("description_data");
 
 document.addEventListener('mousemove', getPosition);
 
@@ -34,6 +36,18 @@ line.onmouseleave = function onMouseLeave() {
     placepoint.style.opacity = "0%";
 }
 
+var dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
+var uniqueid = 1;
 submit_button.onclick = function SubmitData() {
+    var obj = {
+        id: uniqueid,
+        title: title_data.value,
+        description: description_data.value
+    }
+    dataStore.push(obj); // stores into array
+    uniqueid++;
     point_data.style.opacity = "0%";
+    localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
+    console.log(JSON.stringify(dataStore)); // for logging purposes
+    // console.log(dataStore); // for logging purposes
 }
