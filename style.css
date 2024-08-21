@@ -18,6 +18,7 @@ input {
 button {
     border: none;
     cursor: pointer;
+    color: grey;
 }
 
 .flex_column {
