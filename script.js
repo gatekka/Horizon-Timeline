@@ -1,3 +1,4 @@
+// TODO: Display all data points on horizon line.
 const line = document.getElementById("line");
 const defaultcolor = line.style.background;
 const placepoint = document.getElementById("placepoint");
