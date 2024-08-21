@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    /* background-image: url(https://favim.com/pd/s8/orig/151001/autumn-hipster-indie-landscapes-Favim.com-3386448.jpg); */
     background-image: url(https://img3.akspic.ru/attachments/crops/6/3/5/9/4/149536/149536-nacionalnyj_park_maunt_rejnir-dorozhnoe_pokrytie-dorozhnoe_puteshestvie-nebo-solnechnyj_svet-1920x1080.jpg);
     background-size: cover;
     background-position: top;
@@ -12,15 +11,12 @@ body {
 }
 
 .line_container {
-    /* background-color: grey; */
-    /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     flex: 3;
-    /* justify-content: start; */
 }
 
 .placepoint {
@@ -29,7 +25,7 @@ body {
     padding: 20px 2px;
     position: absolute;
     pointer-events: none;
-    /* opacity: 0%; */
+    opacity: 0%;
 }
 
 .point_data {
