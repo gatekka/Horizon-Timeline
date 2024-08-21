@@ -1,4 +1,5 @@
 // TODO: Display all data points on horizon line.
+// TODO: Look into replacing arrays with object constructors? Might be more efficient.
 const line = document.getElementById("line");
 const defaultcolor = line.style.background;
 const placepoint = document.getElementById("placepoint");
