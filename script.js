@@ -8,6 +8,7 @@ const line_container = document.getElementById("line_container");
 const submit_button = document.getElementById("submit_button");
 const title_data = document.getElementById("title_data");
 const description_data = document.getElementById("description_data");
+const mouseXYposition = document.getElementById("mouseXYposition");
 
 
 document.addEventListener('mousemove', getPosition);
@@ -17,7 +18,7 @@ function getPosition(event) {
     mousex = event.pageX;
     mousey = event.pageY;
     var positionText= "X: " + mousex + ", Y: " + mousey;
-    document.getElementById("result").innerText = positionText;
+    mouseXYposition.innerText = positionText;
     placepoint.style.left = mousex + "px"; // move point with mouse
 }
 
@@ -77,3 +78,7 @@ description_data.addEventListener('keydown', (ev) => {
         console.log("pressed enter"); // for logging purposes
     }
 })
+
+mouseXYposition.onclick = function displayPointData() {
+    alert(JSON.stringify(dataStore))
+}
