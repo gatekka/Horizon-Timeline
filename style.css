@@ -37,7 +37,6 @@ button {
 
 .placepoint {
     background-color: rgb(135, 45, 143);
-    display: none;
     padding: 20px 2px;
     position: absolute;
     pointer-events: none;
@@ -49,7 +48,6 @@ button {
     display: flex;
     flex-direction: column;
     gap: 0.5vh;
-    opacity: 0%;
     position: absolute;
     top: 56vh;
     left: 20vw;
@@ -77,4 +75,8 @@ button {
     background-color: rgb(121, 200, 214);
     padding: 10px 30vw;
     cursor: pointer;
+}
+
+.isHidden {
+    display: none;
 }

@@ -23,7 +23,7 @@ function getPosition(event) {
 }
 
 line.onclick = function placePoint() {
-    point_data.style.opacity = "100%";
+    point_data.classList.remove('isHidden');
     point_data.style.left = mousex + "px";
     title_data.focus(); // auto focuses to title input field
     console.log("clicked horizon");
@@ -31,12 +31,12 @@ line.onclick = function placePoint() {
 
 line.onmouseover = function displayPoint() {
     line.style.background = "#8fD362";
-    placepoint.style.display = 'block';
+    placepoint.classList.remove('isHidden');
 }
 
 line.onmouseleave = function onMouseLeave() {
     line.style.background = defaultcolor;
-    placepoint.style.display = 'none';
+    placepoint.classList.add('isHidden');
 }
 
 // FIX: Rework uniqueid. Currently restarts back to 1 after importing from localStorage. Make it random x-length string instead of increasing by 1?
@@ -52,7 +52,7 @@ function SubmitData() {
     localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
     uniqueid++;
 
-    point_data.style.opacity = "0%";
+    point_data.classList.add('isHidden');
 
     // Clearing input boxes
     title_data.value = ""; 
