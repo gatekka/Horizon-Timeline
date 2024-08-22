@@ -37,11 +37,10 @@ button {
 
 .placepoint {
     background-color: rgb(135, 45, 143);
-    display: block;
+    display: none;
     padding: 20px 2px;
     position: absolute;
     pointer-events: none;
-    opacity: 0%;
 }
 
 .point_data {

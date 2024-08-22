@@ -22,11 +22,6 @@ function getPosition(event) {
     placepoint.style.left = mousex + "px"; // move point with mouse
 }
 
-line.onmouseover = function displayPoint() {
-    line.style.background = "#8fD362";
-    placepoint.style.opacity = "100%";
-}
-
 line.onclick = function placePoint() {
     point_data.style.opacity = "100%";
     point_data.style.left = mousex + "px";
@@ -34,9 +29,14 @@ line.onclick = function placePoint() {
     console.log("clicked horizon");
 }
 
+line.onmouseover = function displayPoint() {
+    line.style.background = "#8fD362";
+    placepoint.style.display = 'block';
+}
+
 line.onmouseleave = function onMouseLeave() {
     line.style.background = defaultcolor;
-    placepoint.style.opacity = "0%";
+    placepoint.style.display = 'none';
 }
 
 // FIX: Rework uniqueid. Currently restarts back to 1 after importing from localStorage. Make it random x-length string instead of increasing by 1?
