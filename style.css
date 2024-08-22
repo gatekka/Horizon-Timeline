@@ -3,6 +3,7 @@ body {
     background-image: url(https://img3.akspic.ru/attachments/crops/6/3/5/9/4/149536/149536-nacionalnyj_park_maunt_rejnir-dorozhnoe_pokrytie-dorozhnoe_puteshestvie-nebo-solnechnyj_svet-1920x1080.jpg);
     background-size: cover;
     background-position: top;
+    overflow: hidden;
 }
 
 body * {

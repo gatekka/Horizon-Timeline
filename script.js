@@ -25,6 +25,7 @@ function getPosition(event) {
 line.onclick = function placePoint() {
     point_data.classList.remove('isHidden');
     point_data.style.left = mousex + "px";
+    point_data.style.transition = '1s';
     title_data.focus(); // auto focuses to title input field
     console.log("clicked horizon");
 }
