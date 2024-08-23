@@ -10,22 +10,20 @@ const title_data = document.getElementById("title_data");
 const description_data = document.getElementById("description_data");
 const mouseXYposition = document.getElementById("mouseXYposition");
 
-
-document.addEventListener('mousemove', getPosition);
 var mousex;
 var mousey;
-function getPosition(event) {
+document.addEventListener('mousemove', function getMousePosition(event) {
     mousex = event.pageX;
     mousey = event.pageY;
     var positionText= "X: " + mousex + ", Y: " + mousey;
     mouseXYposition.innerText = positionText;
     if (clickedOnLine == false) {
         placepoint.style.left = mousex + "px"; // move point with mouse
-    }
-}
+    }   
+});
 
 var clickedOnLine = false;
-line.onclick = function placePoint() {
+line.onclick = function showPointData() {
     clickedOnLine = true;
     point_data.classList.remove('isHidden');
     placepoint.classList.add('placepoint-active');
@@ -92,15 +90,15 @@ function SubmitData() {
 
 submit_button.onclick = SubmitData;
 
-title_data.addEventListener('keydown', (ev) => {
-    if(ev.key == 'Enter') {
+title_data.addEventListener('keydown', function(event) {
+    if(event.key == 'Enter') {
         console.log("Pressed Enter"); // for logging purposes
         SubmitData();
     }
 })
 
-description_data.addEventListener('keydown', (ev) => {
-    if(ev.key == 'Enter') {
+description_data.addEventListener('keydown', function(event) {
+    if(event.key == 'Enter') {
         console.log("Pressed Enter"); // for logging purposes
         SubmitData();
     }
