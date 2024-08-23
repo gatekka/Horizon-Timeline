@@ -28,14 +28,11 @@ var clickedOnLine = false;
 line.onclick = function placePoint() {
     clickedOnLine = true;
     point_data.classList.remove('isHidden');
-    point_data.style.left = mousex + "px";
-    point_data.style.transition = '1s';
-    if (clickedOnLine == true) {
-        placepoint.style.left = mousex + 'px';
-    }
     placepoint.classList.add('placepoint-active');
+    point_data.style.left = mousex + "px";
+    placepoint.style.left = mousex + 'px';
     title_data.focus(); // auto focuses to title input field
-    console.log("Clicked on timeline.");
+    console.log("Clicked on timeline."); // Log to console
 }
 
 document.addEventListener('click', function(event) {  

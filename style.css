@@ -45,6 +45,7 @@ button {
 
 .placepoint-active {
     background-color: aqua;
+    transition: 0.5s;
 }
 
 .point_data {
@@ -58,6 +59,8 @@ button {
     left: 20vw;
     width: 25vw;
     max-width: 320px;
+    transition: 1s;
+    transition-behavior: allow-discrete;
 }
 
 .point_data input, button {
@@ -84,4 +87,5 @@ button {
 
 .isHidden {
     display: none;
+    opacity: 0;
 }
