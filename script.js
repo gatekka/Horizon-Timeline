@@ -35,17 +35,15 @@ line.onclick = function placePoint() {
     }
     placepoint.classList.add('placepoint-active');
     title_data.focus(); // auto focuses to title input field
-    console.log("clicked horizon");
+    console.log("Clicked on timeline.");
 }
-// TODO: Unfocusing input box should hide point_data
-// point_data.addEventListener('focusout', handleFocusOut)
-// line_container.addEventListener('focusout', handleFocusOut)
-// function handleFocusOut(event) {
-//     if (!point_data.contains(event.relatedTarget) && !line_container.contains(event.relatedTarget)) {
-//         cancelData();
-//         console.log('point_data no longer in focus'); // logging
-//     }
-// }
+
+document.addEventListener('click', function(event) {  
+    if (!line.contains(event.target) && !point_data.contains(event.target)) {
+        inactiveStylingActivate();
+        console.log('Point unfocused!'); // Log to console
+    }
+});
 
 line.onmouseover = function displayPoint() {
     line.style.background = "#8fD362";
@@ -92,22 +90,22 @@ function SubmitData() {
 
     // console.log(localStorage); // for logging purposes
     // console.log(JSON.stringify(dataStore)); // for logging purposes
-    console.log(dataStore); // for logging purposes
+    console.log('Point data stored: ' + JSON.stringify(obj)); // for logging purposes
 }
 
 submit_button.onclick = SubmitData;
 
 title_data.addEventListener('keydown', (ev) => {
     if(ev.key == 'Enter') {
+        console.log("Pressed Enter"); // for logging purposes
         SubmitData();
-        console.log("pressed enter"); // for logging purposes
     }
 })
 
 description_data.addEventListener('keydown', (ev) => {
     if(ev.key == 'Enter') {
+        console.log("Pressed Enter"); // for logging purposes
         SubmitData();
-        console.log("pressed enter"); // for logging purposes
     }
 })
 
