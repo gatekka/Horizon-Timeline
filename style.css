@@ -43,6 +43,10 @@ button {
     pointer-events: none;
 }
 
+.placepoint-active {
+    background-color: aqua;
+}
+
 .point_data {
     padding: 10px 5px 10px 5px;
     background-color: rgb(179, 179, 113);

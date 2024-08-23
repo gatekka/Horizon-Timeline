@@ -1,5 +1,6 @@
 // TODO: Display all data points on horizon line.
 // TODO: Look into replacing arrays with object constructors? Might be more efficient.
+// TODO: Unfocusing input box should hide point_data
 const line = document.getElementById("line");
 const defaultcolor = line.style.background;
 const placepoint = document.getElementById("placepoint");
@@ -19,13 +20,21 @@ function getPosition(event) {
     mousey = event.pageY;
     var positionText= "X: " + mousex + ", Y: " + mousey;
     mouseXYposition.innerText = positionText;
-    placepoint.style.left = mousex + "px"; // move point with mouse
+    if (clickedOnLine == false) {
+        placepoint.style.left = mousex + "px"; // move point with mouse
+    }
 }
 
+var clickedOnLine = false;
 line.onclick = function placePoint() {
+    clickedOnLine = true;
     point_data.classList.remove('isHidden');
     point_data.style.left = mousex + "px";
     point_data.style.transition = '1s';
+    if (clickedOnLine == true) {
+        placepoint.style.left = mousex + 'px';
+    }
+    placepoint.classList.add('placepoint-active');
     title_data.focus(); // auto focuses to title input field
     console.log("clicked horizon");
 }
@@ -36,8 +45,10 @@ line.onmouseover = function displayPoint() {
 }
 
 line.onmouseleave = function onMouseLeave() {
+    if(clickedOnLine == false) {
+        placepoint.classList.add('isHidden');
+    }
     line.style.background = defaultcolor;
-    placepoint.classList.add('isHidden');
 }
 
 // FIX: Rework uniqueid. Currently restarts back to 1 after importing from localStorage. Make it random x-length string instead of increasing by 1?
@@ -54,6 +65,10 @@ function SubmitData() {
     uniqueid++;
 
     point_data.classList.add('isHidden');
+    placepoint.classList.add('isHidden');
+    placepoint.classList.remove('placepoint-active');
+
+    clickedOnLine = false;
 
     // Clearing input boxes
     title_data.value = ""; 
