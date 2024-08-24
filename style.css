@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
 body {
     margin: 0;
     background-image: url(https://img3.akspic.ru/attachments/crops/6/3/5/9/4/149536/149536-nacionalnyj_park_maunt_rejnir-dorozhnoe_pokrytie-dorozhnoe_puteshestvie-nebo-solnechnyj_svet-1920x1080.jpg);
-    background-size: cover;
+    background-size: fill;
     background-position: top;
     overflow: hidden;
 }
@@ -30,8 +32,8 @@ button {
 .line_container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+    padding: 33vh 8vw 0px;
     height: 100vh;
     flex: 3;
 }
@@ -39,6 +41,7 @@ button {
 .placepoint {
     background-color: rgb(135, 45, 143);
     padding: 20px 2px;
+    margin: -10px 0px 0px 0px;
     position: absolute;
     pointer-events: none;
 }
@@ -55,9 +58,11 @@ button {
     flex-direction: column;
     gap: 0.5vh;
     position: absolute;
-    top: 56vh;
-    left: 20vw;
-    width: 25vw;
+    /* top: 56vh; */
+    margin: 70px 0px 0px 0px;
+    padding: 10px 5px;
+    /* left: 20vw; */
+    width: 40vw;
     max-width: 320px;
     transition: 1s;
     transition-behavior: allow-discrete;
@@ -65,18 +70,24 @@ button {
 
 .point_data input, button {
     background-color: #d4d38d;
+    font-family: 'Comfortaa';
+    /* font-size: 1em; */
 }
 
 .point_data .submit_button {
     padding: 4px 0px;
 }
 
-.point_data .submit_button:active {
+.submit_button:active, .add-attachment:active {
     background-color: #868658;
 }
 
 .point_data .description {
     height: 36px;
+}
+
+.add-attachment {
+    height: 32px;
 }
 
 .line {
