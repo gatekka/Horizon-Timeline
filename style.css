@@ -58,10 +58,8 @@ button {
     flex-direction: column;
     gap: 0.5vh;
     position: absolute;
-    /* top: 56vh; */
     margin: 70px 0px 0px 0px;
     padding: 10px 5px;
-    /* left: 20vw; */
     width: 40vw;
     max-width: 320px;
     transition: 1s;
