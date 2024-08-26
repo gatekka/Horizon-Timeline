@@ -41,7 +41,6 @@ line.onclick = function showPointData() {
         point_data.style.left = mousex + "px";
     } else {
         point_data.style.left = point_dataMaxAllowablePosition + "px";
-        // point_data.style.left = point_dataMaxAllowablePosition + "px";
     }
     point_data.classList.remove('isHidden');
     placepoint.classList.add('placepoint-active');
