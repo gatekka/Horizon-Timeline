@@ -1,7 +1,6 @@
 // TODO: Display all data points on horizon line.
 // TODO: Look into replacing arrays with object constructors? Might be more efficient.
 const line = document.getElementById("line");
-const defaultcolor = line.style.background;
 const placepoint = document.getElementById("placepoint");
 const point_data = document.getElementById("point_data");
 const line_container = document.getElementById("line_container");
@@ -19,15 +18,33 @@ document.addEventListener('mousemove', function getMousePosition(event) {
     mouseXYposition.innerText = positionText;
     if (clickedOnLine == false) {
         placepoint.style.left = mousex + "px"; // move point with mouse
-    }   
+    }
 });
+
+let saveTransitionBehavior;
+let point_dataMaxAllowablePosition
+initializePointData();
+function initializePointData() { // Temporarily exposes point_data to store offsetWidth
+    console.log('Initialized point_data');
+    saveTransitionBehavior = point_data.style.transitionBehavior;
+    point_data.style.transitionBehavior = 'initial'
+    point_data.classList.remove('isHidden');
+    point_dataMaxAllowablePosition = line.offsetWidth + line.offsetLeft - point_data.offsetWidth;
+    point_data.classList.add('isHidden');
+}
 
 var clickedOnLine = false;
 line.onclick = function showPointData() {
     clickedOnLine = true;
+    point_data.style.transitionBehavior = saveTransitionBehavior;
+    if (mousex < point_dataMaxAllowablePosition) {
+        point_data.style.left = mousex + "px";
+    } else {
+        point_data.style.left = point_dataMaxAllowablePosition + "px";
+        // point_data.style.left = point_dataMaxAllowablePosition + "px";
+    }
     point_data.classList.remove('isHidden');
     placepoint.classList.add('placepoint-active');
-    point_data.style.left = mousex + "px";
     placepoint.style.left = mousex + 'px';
     title_data.focus(); // auto focuses to title input field
     console.log("Clicked on timeline."); // Log to console
@@ -40,6 +57,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
+const defaultcolor = line.style.background;
 line.onmouseover = function displayPoint() {
     line.style.background = "#8fD362";
     placepoint.classList.remove('isHidden');
