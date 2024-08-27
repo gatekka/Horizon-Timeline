@@ -37,7 +37,6 @@ function initializePointData() { // Temporarily exposes point_data to store offs
  clickedOnLine = false;
 line.onclick = function showPointData() {
     clickedOnLine = true;
-    placePointOnLine();
     point_data.style.transitionBehavior = saveTransitionBehavior;
     if (mousex < point_dataMaxAllowablePosition) {
         point_data.style.left = mousex + "px";
@@ -53,7 +52,7 @@ line.onclick = function showPointData() {
 
 function placePointOnLine() {
     placedPoint.classList.remove('isHidden');
-    placedPoint.style.left = mousex + 'px';
+    placedPoint.style.left = hoverPoint.style.left;
     point_data.classList.add('isHidden');
     /* placedPoint.addEventListener('mouseover', function() {
         placedPoint.style.backgroundColor = 'red';
@@ -101,6 +100,7 @@ function inactiveStylingActivate() {
 
 const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
 function SubmitData() {
+    placePointOnLine();
     let objPointData = {}
     objPointData.id = dataStore.length;
     objPointData.title = title_data.value;
