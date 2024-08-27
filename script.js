@@ -100,8 +100,8 @@ function inactiveStylingActivate() {
 }
 
 const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
-let objPointData = {}
 function SubmitData() {
+    let objPointData = {}
     objPointData.id = dataStore.length;
     objPointData.title = title_data.value;
     objPointData.description = description_data.value;
