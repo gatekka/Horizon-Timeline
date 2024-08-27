@@ -38,7 +38,7 @@ button {
     flex: 3;
 }
 
-.placepoint {
+.hoverPoint {
     background-color: rgb(135, 45, 143);
     padding: 20px 2px;
     margin: -10px 0px 0px 0px;
@@ -46,7 +46,7 @@ button {
     pointer-events: none;
 }
 
-.placepoint-active {
+.hoverPoint-active {
     background-color: aqua;
     transition: 0.5s;
 }
@@ -92,6 +92,14 @@ button {
     background-color: rgb(121, 200, 214);
     padding: 10px 30vw;
     cursor: pointer;
+}
+
+.placedPoint {
+    background-color: rgb(108, 117, 165);
+    padding: 10px 2px;
+    border-radius: 10px;
+    position: absolute;
+    /* pointer-events: none; */
 }
 
 .isHidden {
