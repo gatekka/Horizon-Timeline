@@ -1,105 +1,323 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
-body {
-    margin: 0;
-    background-image: url(https://img3.akspic.ru/attachments/crops/6/3/5/9/4/149536/149536-nacionalnyj_park_maunt_rejnir-dorozhnoe_pokrytie-dorozhnoe_puteshestvie-nebo-solnechnyj_svet-1920x1080.jpg);
-    background-size: fill;
-    background-position: top;
-    overflow: hidden;
+/* KEYFRAMES */
+@keyframes fade-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.9);
+    }
+    
+    100% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
 }
 
-body * {
-    border-radius: 7px;
+@keyframes fade-up {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    
+    100% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow: hidden;
+    background-image: url(https://live.staticflickr.com/5601/15620722866_12289eefe6_k.jpg);
+    background-position: center;
+    background-blend-mode: overlay;
+    mix-blend-mode: hard-light;
+
+    
 }
 
 input {
-    padding: 4px;
+    padding: 8px 10px 5px 10px;
     border: none;
     outline: none;
+    border-radius: 2px;
 }
 
 button {
     border: none;
     cursor: pointer;
-    color: grey;
+    color: #939393;
+}
+
+.landingPage {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #625D5D;
+    transition: 0.2s;
+    transition-behavior: allow-discrete;
+}
+
+.landingCircle {
+    background: linear-gradient(
+        137deg,
+        #FFFFFF 0%,
+        #D9D9D9 50%,
+        #909090 100%
+        );
+        height: 122px;
+        width: 122px;
+        border-radius: 61px;
+        opacity: 0.34;
+        transition: 0.3s;
+}
+
+.landingCircle:hover {
+    cursor: pointer;
+    opacity: 1;
+    box-shadow: 0px 0px 74.1px rgba(213, 213, 213, 0.68);
+}
+
+.landingPageText {
+    font-family: Roboto Mono;
+    font-size: 24px;
+    color: #FFFFFF;
+    opacity: 0.34;
+    transition: 0.3s;
+}
+
+.landingCircle:hover + .landingPageText {
+    opacity: 1;
+}
+
+.clearData {
+    position: absolute;
+    /* opacity: 0; */
+    /* padding: 20px 20px; */
+    padding: 10px;
+    bottom: 0;
+    left: 0;
+    background-color: wheat;
+}
+
+.clearData:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.overlayContainer::after {
+    background-image: url(https://live.staticflickr.com/5601/15620722866_12289eefe6_k.jpg);
+    mix-blend-mode: overlay;
+    background-size: fill;
+    background-position: center;
+
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.mouseXYposition {
+    position: absolute;
+    cursor: pointer;
+    top: 30px;
+    left: 30px;
+    color: wheat;
+}
+
+.flex_horizontal {
+    display: flex;
+    /* width: 100%; */
+    gap: 10px;
+}
+
+.flex_horizontal_points {
+    display: flex;
+    padding: 5px 0px;
+    margin: -5px 0px 0px 0px;
+    pointer-events: none;
+    justify-content: space-around;
 }
 
 .flex_column {
     display: flex;
     flex-direction: column;
+    justify-content: space;
 }
 
 .line_container {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    padding: 33vh 8vw 0px;
-    height: 100vh;
-    flex: 3;
+    padding: 39vh 12vw 0px;
+    animation: fade-down 1s;
+}
+
+.dataConnectionLine {
+    /* background-color: blue; */
+    background: linear-gradient(
+        47deg,
+        #FFFFFF 0%,
+        #D9D9D9 50%,
+        rgba(144, 144, 144, 0) 100%
+    );
+    border-radius: 5px;
+    z-index: -1;
+    padding: 0px 2px 68px 2px;
+    margin: 90px 0px 0px 0px;
+    position: absolute;
+    transition: 1s;
+}
+
+.hoverPointInnerCircle {
+    background-color: #625D5D;
+    padding: 8px;
+    border-radius: 8px;
+    position: absolute;
 }
 
 .hoverPoint {
-    background-color: rgb(135, 45, 143);
-    padding: 20px 2px;
-    margin: -10px 0px 0px 0px;
+    /* background-color: rgb(189, 187, 189); */
+    background: linear-gradient(
+        137deg,
+        #FFFFFF 0%,
+        #D9D9D9 50%,
+        #909090 100%
+    );
+    padding: 12px;
+    border-radius: 12px;
+    margin: -6px 0px 0px -12px;
     position: absolute;
     pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.hoverPoint-active {
-    background-color: aqua;
+.hoverPoint-onPlace {
+    padding: 12px;
+    position: static;
+    pointer-events: none;
+    margin: -16px 0px 0px 0px;
+    animation: fade-up 0.25s
+
+}    
+
+.hoverPoint-onClick {
+    padding: 16px;
+    border-radius: 16px;
+    margin: -10px 0px 0px -16px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    transition: 0.25s;
+}
+
+.hoverPoint-onClick .hoverPointInnerCircle {
+    background-color: #625D5D;
+    padding: 11px;
+    border-radius: 11px;
     transition: 0.5s;
 }
 
+.hoverPoint-onClick .dataConnectionLine {
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    animation: fade-down 0.5s;
+}
+
+.hoverPoint-onPlace .dataConnectionLine {
+    background: linear-gradient(
+        133deg,
+        #FFFFFF 0%,
+        #D9D9D9 50%,
+        rgba(144, 144, 144, 0) 100%
+    );
+    padding: 2px 1px 41px 2px;
+    margin: -66px 0px 0px 0px;
+    animation: fade-up 0.5s;
+}
+
 .point_data {
-    padding: 10px 5px 10px 5px;
-    background-color: rgb(179, 179, 113);
+    background: linear-gradient(
+        57deg,
+        #BABABA 0%,
+        #B6B6B6 50%,
+        #9E9E9E 100%
+    );
+    isolation: isolate;
+
     display: flex;
     flex-direction: column;
-    gap: 0.5vh;
+    gap: 10px;
     position: absolute;
-    margin: 70px 0px 0px 0px;
-    padding: 10px 5px;
-    width: 40vw;
-    max-width: 320px;
-    transition: 1s;
+    margin: 92px 0px 0px -8px;
+    padding: 15px 20px;
+    width: 376px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15.5px rgba(0, 0, 0, 0.07);
+    animation: fade-down 0.25s;
+    transition: 0.5s;
     transition-behavior: allow-discrete;
 }
 
 .point_data input, button {
-    background-color: #d4d38d;
-    /* font-family: 'Comfortaa'; */
-    /* font-size: 1em; */
+    background-color: #D7D7D7;
+    box-shadow: 2px 4px 12.3px rgba(0, 0, 0, 0.10);
+    font-family: 'Comfortaa';
+    font-weight: 300;
+    font-size: 12px;
 }
 
-.point_data .submit_button {
-    padding: 4px 0px;
+.placedPointDisplay {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+    position: absolute;
+    margin: 0px 0px 178px 0px;
+    animation: fade-down 1s;
+}
+
+.pointTitle {
+    font-family: 'Comfortaa';
+    font-weight: 500;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.pointDate {
+    font-family: 'Comfortaa';
+    font-weight: 300;
+    font-size: 12px;
+    color: #FFFFFF;
 }
 
 .submit_button:active, .add-attachment:active {
     background-color: #868658;
 }
 
-.point_data .description {
-    height: 36px;
+.submit_button {
+    padding: 8px 10px 5px 10px;
 }
 
-.add-attachment {
-    height: 32px;
+.add-attachment, .submit_button {
+    height: 45px;
+    padding: 5px 10px;
+    flex-grow: 1;
 }
 
 .line {
-    background-color: rgb(121, 200, 214);
-    padding: 10px 30vw;
+    background-color: #FFFFFF;
+    padding: 5px 30vw;
+    border-radius: 5px;
     cursor: pointer;
-}
-
-.placedPoint {
-    background-color: rgb(108, 117, 165);
-    padding: 10px 2px;
-    border-radius: 10px;
-    position: absolute;
-    /* pointer-events: none; */
 }
 
 .isHidden {

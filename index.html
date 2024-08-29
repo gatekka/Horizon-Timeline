@@ -7,19 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="mouseXYposition" style="position: absolute; cursor: pointer; padding: 20px; color: wheat;"></div>
-    <div class="line_container" id="line_container">
+    <div class="landingPage" id="landingPage">
+        <div class="landingCircle" id="landingCircle"></div>
+        <div class="landingPageText">ENTER HORIZON</div>
+    </div>
+    <div class="line_container isHidden" id="line_container">
+        <div class="mouseXYposition" id="mouseXYposition"></div>
+        <!-- <div class="clearData"></div> -->
         <div class="line" id="line"></div>
-        <div class="hoverPoint isHidden" id="hoverPoint"></div>
-        <div class="placedPoint isHidden" id="placedPoint"></div>
+        <div class="hoverPoint isHidden" id="hoverPoint">
+            <div class="placedPointDisplay isHidden" id="placedPointDisplay">
+                <div class="pointTitle" id="pointTitle">Title</div>
+                <div class="pointDate" id="pointDate">Date</div>
+            </div>
+            <div class="dataConnectionLine isHidden" id="dataConnectionLine"></div>
+            <div class="hoverPointInnerCircle" id="hoverPointInnerCircle"></div>
+        </div>
+        <div class="flex_horizontal_points" id="flex_horizontal_points"></div>
         <div class="point_data isHidden" id="point_data">
             <input class="title" id="title_data" placeholder="Title" type="text">
             <input class="description" id="description_data" placeholder="Description" type="text">
-            <button class="add-attachment">+ Add Attachment</button>
-            <button class="submit_button" id="submit_button">Submit</button>
+            <div class="flex_horizontal">
+                <button class="add-attachment">+ Add Attachment</button>
+                <button class="add-attachment">+ Add Attachment</button>
+                <button class="submit_button" id="submit_button">Submit</button>
+            </div>
         </div>
-    </div>
-    <div class="wholeContainer">
     </div>
     <script src="script.js"></script>
 </body>
