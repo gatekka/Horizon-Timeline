@@ -27,16 +27,9 @@
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
+    background-color: #625D5D;
     margin: 0;
     overflow: hidden;
-    background-image: url(https://live.staticflickr.com/5601/15620722866_12289eefe6_k.jpg);
-    background-position: center;
-    background-blend-mode: overlay;
-    mix-blend-mode: hard-light;
-
-    
 }
 
 input {
@@ -52,15 +45,31 @@ button {
     color: #939393;
 }
 
+.backgroundImage {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    pointer-events: none;
+    background-image: url(https://live.staticflickr.com/5601/15620722866_12289eefe6_k.jpg);
+    background-position-x: center;
+    background-position-y: center;
+    mix-blend-mode: hard-light;
+    filter: grayscale(1) blur(4px);
+    z-index: 1;
+    transition: 1s;
+}
+
+.backgroundImage-postEffects {
+    filter: grayscale(0) blur(1px);
+}
+
 .landingPage {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background-color: #625D5D;
     transition: 0.2s;
     transition-behavior: allow-discrete;
 }
@@ -71,16 +80,17 @@ button {
         #FFFFFF 0%,
         #D9D9D9 50%,
         #909090 100%
-        );
-        height: 122px;
-        width: 122px;
-        border-radius: 61px;
-        opacity: 0.34;
-        transition: 0.3s;
+    );
+    height: 122px;
+    width: 122px;
+    border-radius: 61px;
+    opacity: 0.34;
+    box-shadow: 0px 0px 74.1px rgba(0, 0, 0, 0.212);
+    cursor: pointer; 
+    transition: 0.3s;
 }
 
 .landingCircle:hover {
-    cursor: pointer;
     opacity: 1;
     box-shadow: 0px 0px 74.1px rgba(213, 213, 213, 0.68);
 }
@@ -90,40 +100,14 @@ button {
     font-size: 24px;
     color: #FFFFFF;
     opacity: 0.34;
+    pointer-events: none;
+    text-shadow: 0px 0px 6px rgb(0, 0, 0, 0.212);
     transition: 0.3s;
 }
 
 .landingCircle:hover + .landingPageText {
+    text-shadow: 0px 0px 14.1px rgba(213, 213, 213, 0.68);
     opacity: 1;
-}
-
-.clearData {
-    position: absolute;
-    /* opacity: 0; */
-    /* padding: 20px 20px; */
-    padding: 10px;
-    bottom: 0;
-    left: 0;
-    background-color: wheat;
-}
-
-.clearData:hover {
-    opacity: 1;
-    cursor: pointer;
-}
-
-.overlayContainer::after {
-    background-image: url(https://live.staticflickr.com/5601/15620722866_12289eefe6_k.jpg);
-    mix-blend-mode: overlay;
-    background-size: fill;
-    background-position: center;
-
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    position: absolute;
-    pointer-events: none;
 }
 
 .mouseXYposition {
@@ -136,14 +120,12 @@ button {
 
 .flex_horizontal {
     display: flex;
-    /* width: 100%; */
     gap: 10px;
 }
 
 .flex_horizontal_points {
     display: flex;
-    padding: 5px 0px;
-    margin: -5px 0px 0px 0px;
+    width: 100%;
     pointer-events: none;
     justify-content: space-around;
 }
@@ -154,15 +136,15 @@ button {
     justify-content: space;
 }
 
-.line_container {
+.lineContainer {
     display: flex;
     flex-direction: column;
-    padding: 39vh 12vw 0px;
+    align-items: center;
+    padding: 39vh 11vw;
     animation: fade-down 1s;
 }
 
 .dataConnectionLine {
-    /* background-color: blue; */
     background: linear-gradient(
         47deg,
         #FFFFFF 0%,
@@ -185,7 +167,6 @@ button {
 }
 
 .hoverPoint {
-    /* background-color: rgb(189, 187, 189); */
     background: linear-gradient(
         137deg,
         #FFFFFF 0%,
@@ -251,8 +232,6 @@ button {
         #B6B6B6 50%,
         #9E9E9E 100%
     );
-    isolation: isolate;
-
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -262,6 +241,8 @@ button {
     width: 376px;
     border-radius: 5px;
     box-shadow: 0px 0px 15.5px rgba(0, 0, 0, 0.07);
+    z-index: 1;
+    mix-blend-mode: hard-light;
     animation: fade-down 0.25s;
     transition: 0.5s;
     transition-behavior: allow-discrete;
@@ -270,7 +251,7 @@ button {
 .point_data input, button {
     background-color: #D7D7D7;
     box-shadow: 2px 4px 12.3px rgba(0, 0, 0, 0.10);
-    font-family: 'Comfortaa';
+    /* font-family: 'Comfortaa'; */
     font-weight: 300;
     font-size: 12px;
 }
@@ -315,9 +296,21 @@ button {
 
 .line {
     background-color: #FFFFFF;
-    padding: 5px 30vw;
+    height: 10px;
+    width: 100%;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.grain {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    background: url(https://cdn.shopify.com/s/files/1/0564/7617/2332/files/GrainBackround.gif?v=1667804647);
+    opacity: 0.3;
+    mix-blend-mode: multiply;
+    z-index: 100;
 }
 
 .isHidden {

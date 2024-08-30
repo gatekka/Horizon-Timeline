@@ -3,9 +3,9 @@
 const line = document.getElementById("line");
 const hoverPoint = document.getElementById("hoverPoint");
 const point_data = document.getElementById("point_data");
-const line_container = document.getElementById("line_container");
+const lineContainer = document.getElementById("lineContainer");
 const submit_button = document.getElementById("submit_button");
-const title_data = document.getElementById("title_data");
+const titleInput = document.getElementById("titleInput");
 const description_data = document.getElementById("description_data");
 const mouseXYposition = document.getElementById("mouseXYposition");
 const dataConnectionLine = document.getElementById("dataConnectionLine");
@@ -16,14 +16,11 @@ const pointTitle = document.getElementById("pointTitle");
 const pointDate = document.getElementById("pointDate");
 const landingPage = document.getElementById("landingPage");
 const landingCircle = document.getElementById("landingCircle");
+const backgroundImage = document.getElementById("backgroundImage");
 
 const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
 
-if (dataStore.length > 0) {
-    console.log('dataStore has more than 0')
-    line_container.classList.remove('isHidden')
-    landingPage.classList.add('isHidden')
-}
+let activeEscapeFlag = false;
 
 let mousex;
 let mousey;
@@ -50,33 +47,43 @@ function initializePointData() { // Temporarily exposes point_data to store offs
     point_data.classList.add('isHidden');
 }
 
-landingCircle.onclick = function enterHorizon() {
+landingCircle.onclick = enterHorizon;
+function enterHorizon() {
+    console.log('Executed enterHorizon()');
     landingPage.classList.add('isHidden');
-    line_container.classList.remove('isHidden');
+    lineContainer.classList.remove('isHidden');
+    backgroundImage.classList.add('backgroundImage-postEffects');
     initializePointData();
 }
 
- clickedOnLine = false;
-line.onclick = function showPointData() {
-    clickedOnLine = true;
-    point_data.style.transitionBehavior = saveTransitionBehavior;
-    if (mousex < point_dataMaxAllowablePosition) {
-        point_data.style.left = mousex + "px";
+clickedOnLine = false;
+line.onclick = showPointData;
+function showPointData() {
+    if (!activeEscapeFlag) {
+        clickedOnLine = true;
+        point_data.style.transitionBehavior = saveTransitionBehavior;
+        if (mousex < point_dataMaxAllowablePosition) {
+            point_data.style.left = mousex + "px";
+        } else {
+            point_data.style.left = point_dataMaxAllowablePosition + "px";
+        }
+        dataConnectionLine.classList.remove('isHidden');
+        hoverPoint.classList.add('hoverPoint-onClick');
+        hoverPoint.style.left = mousex + 'px';
+        console.log("Clicked on timeline."); // Log to console
     } else {
-        point_data.style.left = point_dataMaxAllowablePosition + "px";
+        point_data.style.left = 'auto';
+        console.log("Displaying pointData."); // Log to console
     }
     point_data.classList.remove('isHidden');
-    dataConnectionLine.classList.remove('isHidden');
-    hoverPoint.classList.add('hoverPoint-onClick');
-    hoverPoint.style.left = mousex + 'px';
-    title_data.focus(); // auto focuses to title input field
-    console.log("Clicked on timeline."); // Log to console
+    setTimeout(() => {titleInput.focus()}, 1); // auto focuses to input field after 1 ms
 }
 
 function placePointOnLine() {
-    pointTitle.innerText = title_data.value;
+    pointTitle.innerText = titleInput.value;
     pointDate.innerText = description_data.value;
 
+    dataConnectionLine.classList.remove('isHidden');
     placedPointDisplay.classList.remove('isHidden');
     hoverPoint.classList.remove('hoverPoint-onClick')
     hoverPoint.classList.remove('isHidden');
@@ -99,20 +106,10 @@ line.onmouseover = function displayPoint() {
     hoverPoint.classList.remove('isHidden');
 }
 
-/* document.addEventListener('mousemove', function onMouseLeave(event) {
-    if(clickedOnLine == false && !line.contains(event.target) && !hoverPoint.contains(event.target)) {
-        hoverPoint.classList.add('isHidden');
-        console.log('uhh');
-    }
-}) */
 line.onmouseleave = function onMouseLeave(event) {
     if(clickedOnLine == false) {
         hoverPoint.classList.add('isHidden');
     }
-}
-
-function cancelData() {
-    inactiveStylingActivate();
 }
 
 window.addEventListener('resize', inactiveStylingActivate)
@@ -123,16 +120,17 @@ function inactiveStylingActivate() {
     hoverPoint.classList.add('isHidden');
 
     clickedOnLine = false;
+    activeEscapeFlag = false;
 
     // Clearing input boxes
-    title_data.value = ""; 
+    titleInput.value = ""; 
     description_data.value = "";
 }
 
 function SubmitData() {
     let objPointData = {}
     objPointData.id = dataStore.length;
-    objPointData.title = title_data.value;
+    objPointData.title = titleInput.value;
     objPointData.description = description_data.value;
     dataStore.push(objPointData); // stores into array
     localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
@@ -147,20 +145,37 @@ function SubmitData() {
 
 submit_button.onclick = SubmitData;
 
-title_data.addEventListener('keydown', function(event) {
-    if(event.key == 'Enter') {
-        console.log("Pressed Enter"); // for logging purposes
-        SubmitData();
+titleInput.addEventListener('keydown', handleInputBoxesSubmit)
+description_data.addEventListener('keydown', handleInputBoxesSubmit)
+function handleInputBoxesSubmit(event) {
+    switch (event.key) {
+        case 'Enter':
+            console.log("Pressed Enter"); // for logging purposes
+            SubmitData();
+            break;
+        case 'Escape':
+            inactiveStylingActivate();
+        default:
+            console.log(`"${event.key}" has been pressed.`)
+            break;
     }
-})
+}
 
-description_data.addEventListener('keydown', function(event) {
-    if(event.key == 'Enter') {
-        console.log("Pressed Enter"); // for logging purposes
-        SubmitData();
+window.addEventListener('keydown', function displayPointDataWithKeydown(event) {
+    if((event.key == 'e') && !(getComputedStyle(point_data).display == 'flex')) {
+        console.log(`Pressed ${event.key}.`);
+        activeEscapeFlag = true;
+        showPointData();
     }
 })
 
 mouseXYposition.onclick = function displayPointData() {
     alert(JSON.stringify(dataStore))
+    localStorage.clear();
+    location.reload();
+}
+
+if (dataStore.length > 0) {
+    console.log('\'dataStore\' contains data. Entering Horizon.');
+    enterHorizon();
 }

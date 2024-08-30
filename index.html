@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizon</title>
+    <title>Horizon - A Timeline Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="backgroundImage" id="backgroundImage"></div>
+    <div class="grain"></div>
     <div class="landingPage" id="landingPage">
         <div class="landingCircle" id="landingCircle"></div>
         <div class="landingPageText">ENTER HORIZON</div>
     </div>
-    <div class="line_container isHidden" id="line_container">
+    <div class="lineContainer isHidden" id="lineContainer">
         <div class="mouseXYposition" id="mouseXYposition"></div>
-        <!-- <div class="clearData"></div> -->
         <div class="line" id="line"></div>
         <div class="hoverPoint isHidden" id="hoverPoint">
             <div class="placedPointDisplay isHidden" id="placedPointDisplay">
@@ -25,7 +26,7 @@
         </div>
         <div class="flex_horizontal_points" id="flex_horizontal_points"></div>
         <div class="point_data isHidden" id="point_data">
-            <input class="title" id="title_data" placeholder="Title" type="text">
+            <input class="title" id="titleInput" placeholder="Title" type="text">
             <input class="description" id="description_data" placeholder="Description" type="text">
             <div class="flex_horizontal">
                 <button class="add-attachment">+ Add Attachment</button>
