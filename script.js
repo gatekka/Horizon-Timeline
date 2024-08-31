@@ -125,7 +125,6 @@ document.addEventListener('click', function unfocusElement(event) {
     }
 });
 
-const defaultcolor = line.style.background;
 line.onmouseover = function displayPoint() {
     hoverPoint.classList.remove('isHidden');
 }
