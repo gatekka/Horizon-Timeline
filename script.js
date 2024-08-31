@@ -13,7 +13,7 @@ const hoverPointInnerCircle = document.getElementById("hoverPointInnerCircle");
 const flex_horizontal_points = document.getElementById("flex_horizontal_points");
 const placedPointDisplay = document.getElementById("placedPointDisplay");
 const pointTitle = document.getElementById("pointTitle");
-const pointDate = document.getElementById("pointDate");
+const pointDescription = document.getElementById("pointDescription");
 const landingPage = document.getElementById("landingPage");
 const landingCircle = document.getElementById("landingCircle");
 const backgroundImage = document.getElementById("backgroundImage");
@@ -29,6 +29,8 @@ function renderPointsFromLocalStorage() {
     });
 }
 
+//TODO: When clicking on timeline between 2 points, make it so that its somehow quicker to select date?
+//TODO: Sort points ordered by date
 submit_button.onclick = submitData;
 function submitData() {
     let objPointData = {}
@@ -105,7 +107,7 @@ function showPointData() {
 
 function placePointOnLine(title, description) {
     pointTitle.innerText = title;
-    pointDate.innerText = description;
+    pointDescription.innerText = description;
 
     dataConnectionLine.classList.remove('isHidden');
     placedPointDisplay.classList.remove('isHidden');
