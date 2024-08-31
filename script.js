@@ -108,16 +108,19 @@ function showPointData() {
 function placePointOnLine(title, description) {
     pointTitle.innerText = title;
     pointDescription.innerText = description;
-
+    
     dataConnectionLine.classList.remove('isHidden');
     placedPointDisplay.classList.remove('isHidden');
-    hoverPoint.classList.remove('hoverPoint-onClick')
     hoverPoint.classList.remove('isHidden');
     hoverPoint.classList.add('hoverPoint-onPlace');
+    
     flex_horizontal_points.appendChild(hoverPoint.cloneNode(true));
+    
+    dataConnectionLine.classList.add('isHidden');
     placedPointDisplay.classList.add('isHidden');
     hoverPoint.classList.add('isHidden');
     hoverPoint.classList.remove('hoverPoint-onPlace');
+    hoverPoint.classList.remove('hoverPoint-onClick')
 }
 
 document.addEventListener('click', function unfocusElement(event) {  
