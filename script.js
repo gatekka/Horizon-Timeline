@@ -109,6 +109,7 @@ function placePointOnLine(title, description) {
     pointTitle.innerText = title;
     pointDescription.innerText = description;
     
+    hoverPoint.classList.remove('hoverPoint-onClick');
     dataConnectionLine.classList.remove('isHidden');
     placedPointDisplay.classList.remove('isHidden');
     hoverPoint.classList.remove('isHidden');
@@ -120,7 +121,6 @@ function placePointOnLine(title, description) {
     placedPointDisplay.classList.add('isHidden');
     hoverPoint.classList.add('isHidden');
     hoverPoint.classList.remove('hoverPoint-onPlace');
-    hoverPoint.classList.remove('hoverPoint-onClick')
 }
 
 document.addEventListener('click', function unfocusElement(event) {  
