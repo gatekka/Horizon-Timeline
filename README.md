@@ -1,5 +1,5 @@
 New styling, features, fixes, and refactoring
-- Added ability to create points by pressing 'E'
+- Added ability to create points by pressing 'Tab'
 - Clicking on 'mouseXYposition' box now erases localStorage and refreshes you back to landing page
 - Input boxes can now be canceled by pressing 'Escape'
 - New styling:

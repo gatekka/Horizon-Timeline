@@ -18,9 +18,33 @@ const landingPage = document.getElementById("landingPage");
 const landingCircle = document.getElementById("landingCircle");
 const backgroundImage = document.getElementById("backgroundImage");
 
+let isKeyboardPlottingActive = false;
+
 const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
 
-let activeEscapeFlag = false;
+renderPointsFromLocalStorage();
+function renderPointsFromLocalStorage() {
+    dataStore.forEach(element => {
+        placePointOnLine(element.title, element.description)
+    });
+}
+
+submit_button.onclick = submitData;
+function submitData() {
+    let objPointData = {}
+    objPointData.id = dataStore.length;
+    objPointData.title = titleInput.value;
+    objPointData.description = description_data.value;
+    dataStore.push(objPointData); // stores into array
+    localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
+    
+    placePointOnLine(objPointData.title, objPointData.description);
+    inactiveStylingActivate();
+    
+    // console.log(localStorage); // for logging purposes
+    // console.log(JSON.stringify(dataStore)); // for logging purposes
+    console.log('Point data stored: ' + JSON.stringify(objPointData)); // for logging purposes
+}
 
 let mousex;
 let mousey;
@@ -59,7 +83,7 @@ function enterHorizon() {
 clickedOnLine = false;
 line.onclick = showPointData;
 function showPointData() {
-    if (!activeEscapeFlag) {
+    if (!isKeyboardPlottingActive) {
         clickedOnLine = true;
         point_data.style.transitionBehavior = saveTransitionBehavior;
         if (mousex < point_dataMaxAllowablePosition) {
@@ -79,9 +103,9 @@ function showPointData() {
     setTimeout(() => {titleInput.focus()}, 1); // auto focuses to input field after 1 ms
 }
 
-function placePointOnLine() {
-    pointTitle.innerText = titleInput.value;
-    pointDate.innerText = description_data.value;
+function placePointOnLine(title, description) {
+    pointTitle.innerText = title;
+    pointDate.innerText = description;
 
     dataConnectionLine.classList.remove('isHidden');
     placedPointDisplay.classList.remove('isHidden');
@@ -120,30 +144,12 @@ function inactiveStylingActivate() {
     hoverPoint.classList.add('isHidden');
 
     clickedOnLine = false;
-    activeEscapeFlag = false;
+    isKeyboardPlottingActive = false;
 
     // Clearing input boxes
     titleInput.value = ""; 
     description_data.value = "";
 }
-
-function SubmitData() {
-    let objPointData = {}
-    objPointData.id = dataStore.length;
-    objPointData.title = titleInput.value;
-    objPointData.description = description_data.value;
-    dataStore.push(objPointData); // stores into array
-    localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
-    
-    placePointOnLine();
-    inactiveStylingActivate();
-
-    // console.log(localStorage); // for logging purposes
-    // console.log(JSON.stringify(dataStore)); // for logging purposes
-    console.log('Point data stored: ' + JSON.stringify(objPointData)); // for logging purposes
-}
-
-submit_button.onclick = SubmitData;
 
 titleInput.addEventListener('keydown', handleInputBoxesSubmit)
 description_data.addEventListener('keydown', handleInputBoxesSubmit)
@@ -151,7 +157,7 @@ function handleInputBoxesSubmit(event) {
     switch (event.key) {
         case 'Enter':
             console.log("Pressed Enter"); // for logging purposes
-            SubmitData();
+            submitData();
             break;
         case 'Escape':
             inactiveStylingActivate();
@@ -161,15 +167,25 @@ function handleInputBoxesSubmit(event) {
     }
 }
 
-window.addEventListener('keydown', function displayPointDataWithKeydown(event) {
-    if((event.key == 'e') && !(getComputedStyle(point_data).display == 'flex')) {
-        console.log(`Pressed ${event.key}.`);
-        activeEscapeFlag = true;
-        showPointData();
+window.addEventListener('keydown', (event) => {
+    if (!(getComputedStyle(point_data).display == 'flex')) {
+        switch (event.key) {
+            case 'Tab':
+                console.log(`Pressed ${event.key}.`);
+                isKeyboardPlottingActive = true;
+                showPointData();
+                break;
+            case '?':
+                // TODO: Open settings context menu
+                console.log('TODO: Open settings context menu');
+                break;
+            default:
+                break;
+        }
     }
 })
 
-mouseXYposition.onclick = function displayPointData() {
+mouseXYposition.onclick = () => {
     alert(JSON.stringify(dataStore))
     localStorage.clear();
     location.reload();
