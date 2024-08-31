@@ -33,19 +33,23 @@ function renderPointsFromLocalStorage() {
 //TODO: Sort points ordered by date
 submit_button.onclick = submitData;
 function submitData() {
-    let objPointData = {}
-    objPointData.id = dataStore.length;
-    objPointData.title = titleInput.value;
-    objPointData.description = description_data.value;
-    dataStore.push(objPointData); // stores into array
-    localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
-    
-    placePointOnLine(objPointData.title, objPointData.description);
-    inactiveStylingActivate();
-    
-    // console.log(localStorage); // for logging purposes
-    // console.log(JSON.stringify(dataStore)); // for logging purposes
-    console.log('Point data stored: ' + JSON.stringify(objPointData)); // for logging purposes
+    if (titleInput.value === '' && description_data.value === '') {
+        inactiveStylingActivate();
+    } else {
+        let objPointData = {}
+        objPointData.id = dataStore.length;
+        objPointData.title = titleInput.value;
+        objPointData.description = description_data.value;
+        dataStore.push(objPointData); // stores into array
+        localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
+        
+        placePointOnLine(objPointData.title, objPointData.description);
+        inactiveStylingActivate();
+        
+        // console.log(localStorage); // for logging purposes
+        // console.log(JSON.stringify(dataStore)); // for logging purposes
+        console.log('Point data stored: ' + JSON.stringify(objPointData)); // for logging purposes
+    }
 }
 
 let mousex;
