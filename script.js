@@ -1,5 +1,5 @@
-// TODO: Display all data points on horizon line.
 // TODO: Look into replacing arrays with object constructors? Might be more efficient.
+//TODO: Implement interacting and editing points.
 const line = document.getElementById("line");
 const hoverPoint = document.getElementById("hoverPoint");
 const point_data = document.getElementById("point_data");
@@ -171,6 +171,7 @@ function handleInputBoxesSubmit(event) {
     }
 }
 
+//TODO: Implement case that toggles delete mode? Or maybe only when holding down key is better.
 window.addEventListener('keydown', (event) => {
     if (!(getComputedStyle(point_data).display == 'flex')) {
         switch (event.key) {
