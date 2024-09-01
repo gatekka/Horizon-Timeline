@@ -55,7 +55,7 @@ function submitData() {
         inactiveStylingActivate();
     } else {
         let objPointData = {}
-        objPointData.id = 'point' + (dataStore.length + 1);
+        objPointData.id = dataStore.length + 1;
         objPointData.title = titleInput.value;
         objPointData.description = description_data.value;
         dataStore.push(objPointData); // stores into array
