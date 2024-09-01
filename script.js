@@ -1,4 +1,4 @@
-// TODO: Look into replacing arrays with object constructors? Might be more efficient.
+//TODO: Look into replacing arrays with object constructors? Might be more efficient.
 //TODO: Implement interacting and editing points.
 const line = document.getElementById("line");
 const hoverPoint = document.getElementById("hoverPoint");
@@ -21,6 +21,23 @@ const backgroundImage = document.getElementById("backgroundImage");
 let isKeyboardPlottingActive = false;
 
 const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
+
+description_data.addEventListener('input', e => parseTextToDate(e.target.value));
+const dateOutputText = document.getElementById('dateOutputText');
+const dateOutputTimecode = document.getElementById('dateOutputTimecode');
+function parseTextToDate(input) {
+    let dateString = input.trim();
+    const currentYear = new Date().getFullYear();
+    if (/[A-Za-z]+$/.test(dateString)) {
+        dateString = `${dateString} 1, ${currentYear}`;
+    } else if (/[A-Za-z]+\s\b([1-9]|1[0-9]|2[0-9]|3[0-1])\b$/.test(dateString)) {
+        dateString = `${dateString}, ${currentYear}`;
+    }
+    const convertToDate = new Date(dateString);
+    dateOutputText.innerHTML = convertToDate;
+    dateOutputTimecode.innerHTML = Date.parse(convertToDate);
+    return Date.parse(convertToDate);
+}
 
 renderPointsFromLocalStorage();
 function renderPointsFromLocalStorage() {
@@ -185,7 +202,7 @@ window.addEventListener('keydown', (event) => {
                 showPointData();
                 break;
             case '?':
-                // TODO: Open settings context menu
+                //TODO: Open settings context menu
                 console.log('TODO: Open settings context menu');
                 break;
             default:
