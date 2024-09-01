@@ -1,5 +1,4 @@
 //TODO: Look into replacing arrays with object constructors? Might be more efficient.
-//TODO: Implement interacting and editing points.
 const line = document.getElementById("line");
 const hoverPoint = document.getElementById("hoverPoint");
 const point_data = document.getElementById("point_data");
@@ -130,18 +129,21 @@ function placePointOnLine(title, description) {
     pointTitle.innerText = title;
     pointDescription.innerText = description;
     
-    hoverPoint.classList.remove('hoverPoint-onClick');
     dataConnectionLine.classList.remove('isHidden');
     placedPointDisplay.classList.remove('isHidden');
-    hoverPoint.classList.remove('isHidden');
-    hoverPoint.classList.add('hoverPoint-onPlace');
-    
-    flex_horizontal_points.appendChild(hoverPoint.cloneNode(true));
-    
+    const clonedPoint = hoverPoint.cloneNode(true);
     dataConnectionLine.classList.add('isHidden');
     placedPointDisplay.classList.add('isHidden');
-    hoverPoint.classList.add('isHidden');
-    hoverPoint.classList.remove('hoverPoint-onPlace');
+    
+    clonedPoint.classList.remove('hoverPoint-onClick');
+    clonedPoint.classList.remove('isHidden');
+    clonedPoint.classList.add('hoverPoint-onPlace');
+    clonedPoint.id = `placedPoint${dataStore.length}`;
+
+    flex_horizontal_points.appendChild(clonedPoint);
+    
+    // hoverPoint.classList.add('isHidden');
+    // hoverPoint.classList.remove('hoverPoint-onPlace');
 }
 
 document.addEventListener('click', function unfocusElement(event) {  
@@ -191,6 +193,9 @@ function handleInputBoxesSubmit(event) {
             break;
     }
 }
+
+//TODO: Implement interacting and editing points.
+
 
 //TODO: Implement case that toggles delete mode? Or maybe only when holding down key is better.
 window.addEventListener('keydown', (event) => {
