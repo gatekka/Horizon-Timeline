@@ -111,12 +111,17 @@ button {
     opacity: 1;
 }
 
-.mouseXYposition {
-    position: absolute;
-    cursor: pointer;
+.cornerContainer {
     top: 30px;
     left: 30px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
     color: wheat;
+}
+
+.mouseXYposition {
+    cursor: pointer;
 }
 
 .flex_horizontal {
