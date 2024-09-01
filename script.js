@@ -38,10 +38,12 @@ function parseTextToDate(input) {
     return Date.parse(convertToDate);
 }
 
+let idCount = 1;
 renderPointsFromLocalStorage();
 function renderPointsFromLocalStorage() {
     dataStore.forEach(element => {
         placePointOnLine(element.title, element.description)
+        idCount++;
     });
 }
 
@@ -53,7 +55,7 @@ function submitData() {
         inactiveStylingActivate();
     } else {
         let objPointData = {}
-        objPointData.id = dataStore.length;
+        objPointData.id = dataStore.length + 1;
         objPointData.title = titleInput.value;
         objPointData.description = description_data.value;
         dataStore.push(objPointData); // stores into array
@@ -125,6 +127,11 @@ function showPointData() {
     setTimeout(() => {titleInput.focus()}, 1); // auto focuses to input field after 1 ms
 }
 
+function editPoint(elementID) {
+    const pointToEdit = document.getElementById(elementID);
+    pointToEdit.style.background = 'red';
+}
+
 function placePointOnLine(title, description) {
     pointTitle.innerText = title;
     pointDescription.innerText = description;
@@ -138,12 +145,13 @@ function placePointOnLine(title, description) {
     clonedPoint.classList.remove('hoverPoint-onClick');
     clonedPoint.classList.remove('isHidden');
     clonedPoint.classList.add('hoverPoint-onPlace');
-    clonedPoint.id = `placedPoint${dataStore.length}`;
-
-    flex_horizontal_points.appendChild(clonedPoint);
+    clonedPoint.id = `placedPoint${idCount}`;
     
-    // hoverPoint.classList.add('isHidden');
-    // hoverPoint.classList.remove('hoverPoint-onPlace');
+    clonedPoint.addEventListener('click', e => {
+        console.log(`Clicked ${e.target.id}`);
+        editPoint(e.target.id)
+    })
+    flex_horizontal_points.appendChild(clonedPoint);
 }
 
 document.addEventListener('click', function unfocusElement(event) {  

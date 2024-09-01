@@ -170,6 +170,8 @@ button {
     padding: 8px;
     border-radius: 8px;
     position: absolute;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .hoverPoint {
@@ -192,11 +194,15 @@ button {
 .hoverPoint-onPlace {
     padding: 12px;
     position: static;
-    pointer-events: none;
+    pointer-events: all;
+    cursor: pointer;
     margin: -16px 0px 0px 0px;
     animation: fade-up 0.25s
+}
 
-}    
+.hoverPoint-onPlace:hover {
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
 
 .hoverPoint-onClick {
     padding: 16px;
