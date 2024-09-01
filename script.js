@@ -107,6 +107,7 @@ function enterHorizon() {
 clickedOnLine = false;
 line.onclick = showPointData;
 function showPointData() {
+    unfocusedPoint = false;
     if (!isKeyboardPlottingActive) {
         clickedOnLine = true;
         point_data.style.transitionBehavior = saveTransitionBehavior;
@@ -154,9 +155,11 @@ function placePointOnLine(title, description) {
     flex_horizontal_points.appendChild(clonedPoint);
 }
 
+let unfocusedPoint = true;
 document.addEventListener('click', function unfocusElement(event) {  
-    if (!line.contains(event.target) && !point_data.contains(event.target)) {
+    if (unfocusedPoint === false && !line.contains(event.target) && !point_data.contains(event.target)) {
         inactiveStylingActivate();
+        unfocusedPoint = true;
         console.log('Point unfocused!'); // Log to console
     }
 });
