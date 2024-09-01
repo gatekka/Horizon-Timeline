@@ -55,7 +55,7 @@ function submitData() {
         inactiveStylingActivate();
     } else {
         let objPointData = {}
-        objPointData.id = dataStore.length + 1;
+        objPointData.id = 'point' + (dataStore.length + 1);
         objPointData.title = titleInput.value;
         objPointData.description = description_data.value;
         dataStore.push(objPointData); // stores into array
@@ -130,7 +130,12 @@ function showPointData() {
 
 function editPoint(elementID) {
     const pointToEdit = document.getElementById(elementID);
-    pointToEdit.style.background = 'red';
+    const trimID = elementID.substring(5) - 1;
+    // pointToEdit.style.background = 'red';
+    isKeyboardPlottingActive = true;
+    titleInput.value = dataStore[trimID].title;
+    description_data.value = dataStore[trimID].description;
+    showPointData();
 }
 
 function placePointOnLine(title, description) {
@@ -146,7 +151,7 @@ function placePointOnLine(title, description) {
     clonedPoint.classList.remove('hoverPoint-onClick');
     clonedPoint.classList.remove('isHidden');
     clonedPoint.classList.add('hoverPoint-onPlace');
-    clonedPoint.id = `placedPoint${idCount}`;
+    clonedPoint.id = `point${idCount}`;
     
     clonedPoint.addEventListener('click', e => {
         console.log(`Clicked ${e.target.id}`);
@@ -157,7 +162,7 @@ function placePointOnLine(title, description) {
 
 let unfocusedPoint = true;
 document.addEventListener('click', function unfocusElement(event) {  
-    if (unfocusedPoint === false && !line.contains(event.target) && !point_data.contains(event.target)) {
+    if (unfocusedPoint === false && !line.contains(event.target) && !point_data.contains(event.target) && !flex_horizontal_points.contains(event.target)) {
         inactiveStylingActivate();
         unfocusedPoint = true;
         console.log('Point unfocused!'); // Log to console
