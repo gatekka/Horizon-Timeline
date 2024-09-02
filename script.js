@@ -169,9 +169,11 @@ function placePointOnLine(title, description) {
     clonedPoint.querySelector('.placedPointDisplay').classList.remove('isHidden');
     clonedPoint.querySelector('.dataConnectionLine').classList.remove('isHidden');
     clonedPoint.addEventListener('click', e => {
-        console.log(`Clicked ${e.target.id}`);
-        editPoint(e.target.id)
-    })
+        if (e.target === clonedPoint || e.target.closest('.placedPointDisplay') || e.target.closest('.dataConnectionLine')) {
+            console.log(`Clicked ${clonedPoint.id}`);
+            editPoint(clonedPoint.id);
+        }
+    });    
     flex_horizontal_points.appendChild(clonedPoint);
 }
     
