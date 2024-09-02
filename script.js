@@ -61,23 +61,22 @@ function submitData() {
         pointTitle.innerText = titleInput.value;
         pointDescription.innerText = description_data.value;
         dataStore[getCurrentDataStoreID].title = titleInput.value;
-        dataStore[getCurrentDataStoreID].description = description_data.value
+        dataStore[getCurrentDataStoreID].description = description_data.value;
+        dataStore[getCurrentDataStoreID].timecode = parseTextToDate(description_data.value);
         localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore));
         inactiveStylingActivate();
         console.log(`Confirmed edit for: ${JSON.stringify(dataStore[getCurrentDataStoreID])}`);
     } else {
-        let objPointData = {}
-        objPointData.id = dataStore.length + 1;
-        objPointData.title = titleInput.value;
-        objPointData.description = description_data.value;
-        dataStore.push(objPointData); // stores into array
+        let objPointData = {
+            id: dataStore.length + 1,
+            title: titleInput.value,
+            description: description_data.value,
+            timecode: parseTextToDate(description_data.value)
+        }
+        dataStore.push(objPointData); // stores object into array
         localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
-        
         placePointOnLine(objPointData.title, objPointData.description);
         inactiveStylingActivate();
-        
-        // console.log(localStorage); // for logging purposes
-        // console.log(JSON.stringify(dataStore)); // for logging purposes
         console.log('Point data stored: ' + JSON.stringify(objPointData)); // for logging purposes
     }
     idCount++;
@@ -127,10 +126,12 @@ function positionPointData() {
 }
 
 clickedOnLine = false;
-line.addEventListener('click', showPointData)
-function showPointData() {
+line.addEventListener('click', showSubmissionContainer)
+function showSubmissionContainer() {
     unfocusedPoint = false;
     if (isEditingPoint) {
+        titleInput.value = dataStore[getCurrentDataStoreID].title;
+        description_data.value = dataStore[getCurrentDataStoreID].description;
         positionPointData();
     } else if (!isKeyboardPlottingActive) {
         clickedOnLine = true;
@@ -153,14 +154,11 @@ let getCurrentDataStoreID;
 function editPoint(elementID) {
     inactiveStylingActivate();
     isEditingPoint = true;
-    // isKeyboardPlottingActive = true;
     getCurrentDataStoreID = elementID.substring(5) - 1;
-    console.log(`Now editing: '${JSON.stringify(dataStore[getCurrentDataStoreID])}'`);
     // const pointToEdit = document.getElementById(elementID);
     // pointToEdit.style.background = 'red';
-    titleInput.value = dataStore[getCurrentDataStoreID].title;
-    description_data.value = dataStore[getCurrentDataStoreID].description;
-    showPointData();
+    showSubmissionContainer();
+    console.log(`Now editing: '${JSON.stringify(dataStore[getCurrentDataStoreID])}'`);
 }
 
 function placePointOnLine(title, description) {
@@ -176,7 +174,7 @@ function placePointOnLine(title, description) {
     clonedPoint.querySelector('.dataConnectionLine').classList.remove('isHidden');
     clonedPoint.addEventListener('click', e => {
         if (e.target === clonedPoint || e.target.closest('.placedPointDisplay') || e.target.closest('.dataConnectionLine')) {
-            console.log(`Clicked ${clonedPoint.id}`);
+            console.log(`Clicked '${clonedPoint.id}'`);
             editPoint(clonedPoint.id);
         }
     });    
@@ -245,7 +243,7 @@ window.addEventListener('keydown', (event) => {
             case 'Tab':
                 console.log(`Pressed ${event.key}.`);
                 isKeyboardPlottingActive = true;
-                showPointData();
+                showSubmissionContainer();
                 break;
             case '?':
                 //TODO: Open settings context menu
