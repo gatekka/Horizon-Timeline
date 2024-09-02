@@ -162,7 +162,7 @@ button {
     padding: 0px 2px 68px 2px;
     margin: 90px 0px 0px 0px;
     position: absolute;
-    transition: 1s;
+    transition: 0.25s;
 }
 
 .hoverPointInnerCircle {
@@ -197,10 +197,14 @@ button {
     pointer-events: all;
     cursor: pointer;
     margin: -16px 0px 0px 0px;
-    animation: fade-up 0.25s
+    animation: fade-up 0.25s;
 }
 
 .hoverPoint-onPlace:hover {
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+.hoverPoint-onPlace:hover .dataConnectionLine {
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
 }
 
@@ -213,7 +217,6 @@ button {
 }
 
 .hoverPoint-onClick .hoverPointInnerCircle {
-    background-color: #625D5D;
     padding: 11px;
     border-radius: 11px;
     transition: 0.5s;
