@@ -1,7 +1,7 @@
 //TODO: Look into replacing arrays with object constructors? Might be more efficient.
 const line = document.getElementById("line");
 const hoverPoint = document.getElementById("hoverPoint");
-const point_data = document.getElementById("point_data");
+const pointSubmissionContainer = document.getElementById("pointSubmissionContainer");
 const lineContainer = document.getElementById("lineContainer");
 const submit_button = document.getElementById("submit_button");
 const titleInput = document.getElementById("titleInput");
@@ -97,15 +97,15 @@ document.addEventListener('mousemove', function getMousePosition(event) {
 
 let saveTransitionBehavior;
 let point_dataMaxAllowablePosition
-window.addEventListener('resize', initializePointData)
-initializePointData();
-function initializePointData() { // Temporarily exposes point_data to store offsetWidth
-    console.log('Initialized point_data');
-    saveTransitionBehavior = point_data.style.transitionBehavior;
-    point_data.style.transitionBehavior = 'initial'
-    point_data.classList.remove('isHidden');
-    point_dataMaxAllowablePosition = line.offsetWidth + line.offsetLeft - point_data.offsetWidth;
-    point_data.classList.add('isHidden');
+calculatePointDataMaxAllowablePosition();
+window.addEventListener('resize', calculatePointDataMaxAllowablePosition)
+function calculatePointDataMaxAllowablePosition() { // Temporarily exposes pointSubmissionContainer to store offsetWidth
+    console.log('Initialized pointSubmissionContainer');
+    saveTransitionBehavior = pointSubmissionContainer.style.transitionBehavior;
+    pointSubmissionContainer.style.transitionBehavior = 'initial'
+    pointSubmissionContainer.classList.remove('isHidden');
+    point_dataMaxAllowablePosition = line.offsetWidth + line.offsetLeft - pointSubmissionContainer.offsetWidth;
+    pointSubmissionContainer.classList.add('isHidden');
 }
 
 landingCircle.onclick = enterHorizon;
@@ -114,32 +114,38 @@ function enterHorizon() {
     landingPage.classList.add('isHidden');
     lineContainer.classList.remove('isHidden');
     backgroundImage.classList.add('backgroundImage-postEffects');
-    initializePointData();
+    calculatePointDataMaxAllowablePosition();
+}
+
+function positionPointData() {
+    pointSubmissionContainer.style.transitionBehavior = saveTransitionBehavior;
+    if (mousex < point_dataMaxAllowablePosition) {
+        pointSubmissionContainer.style.left = mousex + "px";
+    } else {
+        pointSubmissionContainer.style.left = point_dataMaxAllowablePosition + "px";
+    }
 }
 
 clickedOnLine = false;
 line.addEventListener('click', showPointData)
 function showPointData() {
     unfocusedPoint = false;
-    if (!isKeyboardPlottingActive) {
-        clearInputs();
+    if (isEditingPoint) {
+        positionPointData();
+    } else if (!isKeyboardPlottingActive) {
         clickedOnLine = true;
-        point_data.style.transitionBehavior = saveTransitionBehavior;
-        if (mousex < point_dataMaxAllowablePosition) {
-            point_data.style.left = mousex + "px";
-        } else {
-            point_data.style.left = point_dataMaxAllowablePosition + "px";
-        }
+        clearInputs();
+        positionPointData();
         dataConnectionLine.classList.remove('isHidden');
         hoverPoint.classList.add('hoverPoint-onClick');
         hoverPoint.style.left = mousex + 'px';
         console.log("Clicked on timeline."); // Log to console
     } else {
-        point_data.style.left = 'auto';
+        pointSubmissionContainer.style.left = 'auto';
         console.log("Displaying pointData."); // Log to console
         isKeyboardPlottingActive = false;
     }
-    point_data.classList.remove('isHidden');
+    pointSubmissionContainer.classList.remove('isHidden');
     setTimeout(() => {titleInput.focus()}, 1); // auto focuses to input field after 1 ms
 }
 
@@ -147,7 +153,7 @@ let getCurrentDataStoreID;
 function editPoint(elementID) {
     inactiveStylingActivate();
     isEditingPoint = true;
-    isKeyboardPlottingActive = true;
+    // isKeyboardPlottingActive = true;
     getCurrentDataStoreID = elementID.substring(5) - 1;
     console.log(`Now editing: '${JSON.stringify(dataStore[getCurrentDataStoreID])}'`);
     // const pointToEdit = document.getElementById(elementID);
@@ -180,7 +186,7 @@ function placePointOnLine(title, description) {
 
 let unfocusedPoint = true;
 document.addEventListener('click', function unfocusElement(event) {  
-    if (unfocusedPoint === false && !line.contains(event.target) && !point_data.contains(event.target) && !flex_horizontal_points.contains(event.target)) {
+    if (unfocusedPoint === false && !line.contains(event.target) && !pointSubmissionContainer.contains(event.target) && !flex_horizontal_points.contains(event.target)) {
         inactiveStylingActivate();
         unfocusedPoint = true;
         console.log('Point unfocused!'); // Log to console
@@ -205,7 +211,7 @@ function clearInputs() {
 }
 
 function inactiveStylingActivate() {
-    point_data.classList.add('isHidden');
+    pointSubmissionContainer.classList.add('isHidden');
     dataConnectionLine.classList.add('isHidden');
     hoverPoint.classList.remove('hoverPoint-onClick');
     hoverPoint.classList.add('isHidden');
@@ -234,7 +240,7 @@ function handleInputBoxesSubmit(event) {
 
 //TODO: Implement case that toggles delete mode? Or maybe only when holding down key is better.
 window.addEventListener('keydown', (event) => {
-    if (!(getComputedStyle(point_data).display == 'flex')) {
+    if (!(getComputedStyle(pointSubmissionContainer).display == 'flex')) {
         switch (event.key) {
             case 'Tab':
                 console.log(`Pressed ${event.key}.`);

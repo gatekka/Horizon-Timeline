@@ -240,7 +240,7 @@ button {
     animation: fade-up 0.5s;
 }
 
-.point_data {
+.pointSubmissionContainer {
     background: linear-gradient(
         57deg,
         #BABABA 0%,
@@ -263,7 +263,7 @@ button {
     transition-behavior: allow-discrete;
 }
 
-.point_data input, button {
+.pointSubmissionContainer input, button {
     background-color: #D7D7D7;
     box-shadow: 2px 4px 12.3px rgba(0, 0, 0, 0.10);
     /* font-family: 'Comfortaa'; */
