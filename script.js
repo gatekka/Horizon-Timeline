@@ -105,7 +105,7 @@ function enterHorizon() {
 }
 
 clickedOnLine = false;
-line.onclick = showPointData;
+line.addEventListener('click', showPointData)
 function showPointData() {
     unfocusedPoint = false;
     if (!isKeyboardPlottingActive) {
@@ -129,6 +129,7 @@ function showPointData() {
 }
 
 function editPoint(elementID) {
+    inactiveStylingActivate();
     const pointToEdit = document.getElementById(elementID);
     const trimID = elementID.substring(5) - 1;
     // pointToEdit.style.background = 'red';
