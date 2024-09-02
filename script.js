@@ -18,6 +18,7 @@ const landingCircle = document.getElementById("landingCircle");
 const backgroundImage = document.getElementById("backgroundImage");
 
 let isKeyboardPlottingActive = false;
+let isEditingPoint = false;
 
 const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
 
@@ -53,6 +54,17 @@ submit_button.onclick = submitData;
 function submitData() {
     if (titleInput.value === '' && description_data.value === '') {
         inactiveStylingActivate();
+    } else if (isEditingPoint) { 
+        const point = document.getElementById(`point${getCurrentDataStoreID + 1}`);
+        const pointTitle = point.querySelector('.placedPointDisplay .pointTitle');
+        const pointDescription = point.querySelector('.placedPointDisplay .pointDescription');
+        pointTitle.innerText = titleInput.value;
+        pointDescription.innerText = description_data.value;
+        dataStore[getCurrentDataStoreID].title = titleInput.value;
+        dataStore[getCurrentDataStoreID].description = description_data.value
+        localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore));
+        inactiveStylingActivate();
+        console.log(`Confirmed edit for: ${JSON.stringify(dataStore[getCurrentDataStoreID])}`);
     } else {
         let objPointData = {}
         objPointData.id = dataStore.length + 1;
@@ -110,8 +122,7 @@ line.addEventListener('click', showPointData)
 function showPointData() {
     unfocusedPoint = false;
     if (!isKeyboardPlottingActive) {
-        titleInput.value = ""; 
-        description_data.value = "";
+        clearInputs();
         clickedOnLine = true;
         point_data.style.transitionBehavior = saveTransitionBehavior;
         if (mousex < point_dataMaxAllowablePosition) {
@@ -132,38 +143,38 @@ function showPointData() {
     setTimeout(() => {titleInput.focus()}, 1); // auto focuses to input field after 1 ms
 }
 
+let getCurrentDataStoreID;
 function editPoint(elementID) {
     inactiveStylingActivate();
-    const pointToEdit = document.getElementById(elementID);
-    const trimID = elementID.substring(5) - 1;
-    // pointToEdit.style.background = 'red';
+    isEditingPoint = true;
     isKeyboardPlottingActive = true;
-    titleInput.value = dataStore[trimID].title;
-    description_data.value = dataStore[trimID].description;
+    getCurrentDataStoreID = elementID.substring(5) - 1;
+    console.log(`Now editing: '${JSON.stringify(dataStore[getCurrentDataStoreID])}'`);
+    // const pointToEdit = document.getElementById(elementID);
+    // pointToEdit.style.background = 'red';
+    titleInput.value = dataStore[getCurrentDataStoreID].title;
+    description_data.value = dataStore[getCurrentDataStoreID].description;
     showPointData();
 }
 
 function placePointOnLine(title, description) {
     pointTitle.innerText = title;
     pointDescription.innerText = description;
-    
-    dataConnectionLine.classList.remove('isHidden');
-    placedPointDisplay.classList.remove('isHidden');
+
     const clonedPoint = hoverPoint.cloneNode(true);
-    dataConnectionLine.classList.add('isHidden');
-    placedPointDisplay.classList.add('isHidden');
-    
+    clonedPoint.id = `point${idCount}`;
     clonedPoint.classList.remove('hoverPoint-onClick');
     clonedPoint.classList.remove('isHidden');
     clonedPoint.classList.add('hoverPoint-onPlace');
-    clonedPoint.id = `point${idCount}`;
-    
+    clonedPoint.querySelector('.placedPointDisplay').classList.remove('isHidden');
+    clonedPoint.querySelector('.dataConnectionLine').classList.remove('isHidden');
     clonedPoint.addEventListener('click', e => {
         console.log(`Clicked ${e.target.id}`);
         editPoint(e.target.id)
     })
     flex_horizontal_points.appendChild(clonedPoint);
 }
+    
 
 let unfocusedPoint = true;
 document.addEventListener('click', function unfocusElement(event) {  
@@ -185,6 +196,12 @@ line.onmouseleave = function onMouseLeave(event) {
 }
 
 window.addEventListener('resize', inactiveStylingActivate)
+
+function clearInputs() {
+    titleInput.value = ""; 
+    description_data.value = "";
+}
+
 function inactiveStylingActivate() {
     point_data.classList.add('isHidden');
     dataConnectionLine.classList.add('isHidden');
@@ -192,11 +209,9 @@ function inactiveStylingActivate() {
     hoverPoint.classList.add('isHidden');
 
     clickedOnLine = false;
+    isEditingPoint = false;
     isKeyboardPlottingActive = false;
-
-    // Clearing input boxes
-    titleInput.value = ""; 
-    description_data.value = "";
+    clearInputs();
 }
 
 titleInput.addEventListener('keydown', handleInputBoxesSubmit)
@@ -210,7 +225,7 @@ function handleInputBoxesSubmit(event) {
         case 'Escape':
             inactiveStylingActivate();
         default:
-            console.log(`"${event.key}" has been pressed.`)
+            // console.log(`"${event.key}" has been pressed.`)
             break;
     }
 }
