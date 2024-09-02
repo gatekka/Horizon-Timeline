@@ -68,6 +68,7 @@ function submitData() {
         // console.log(JSON.stringify(dataStore)); // for logging purposes
         console.log('Point data stored: ' + JSON.stringify(objPointData)); // for logging purposes
     }
+    idCount++;
 }
 
 let mousex;
