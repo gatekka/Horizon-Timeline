@@ -110,6 +110,8 @@ line.addEventListener('click', showPointData)
 function showPointData() {
     unfocusedPoint = false;
     if (!isKeyboardPlottingActive) {
+        titleInput.value = ""; 
+        description_data.value = "";
         clickedOnLine = true;
         point_data.style.transitionBehavior = saveTransitionBehavior;
         if (mousex < point_dataMaxAllowablePosition) {
@@ -124,6 +126,7 @@ function showPointData() {
     } else {
         point_data.style.left = 'auto';
         console.log("Displaying pointData."); // Log to console
+        isKeyboardPlottingActive = false;
     }
     point_data.classList.remove('isHidden');
     setTimeout(() => {titleInput.focus()}, 1); // auto focuses to input field after 1 ms
@@ -211,9 +214,6 @@ function handleInputBoxesSubmit(event) {
             break;
     }
 }
-
-//TODO: Implement interacting and editing points.
-
 
 //TODO: Implement case that toggles delete mode? Or maybe only when holding down key is better.
 window.addEventListener('keydown', (event) => {
