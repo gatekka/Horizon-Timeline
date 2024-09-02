@@ -26,6 +26,15 @@
     }
 }
 
+@keyframes fadeOutAnimation {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 body {
     background-color: #625D5D;
     margin: 0;
@@ -330,6 +339,10 @@ button {
     opacity: 0.3;
     mix-blend-mode: multiply;
     z-index: 100;
+}
+
+.fadeOut {
+    animation: fadeOutAnimation 0.5s forwards;
 }
 
 .isHidden {

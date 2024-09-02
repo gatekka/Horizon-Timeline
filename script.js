@@ -89,7 +89,7 @@ document.addEventListener('mousemove', function getMousePosition(event) {
     mousey = event.pageY;
     const positionText= "X: " + mousex + ", Y: " + mousey;
     mouseXYposition.innerText = positionText;
-    if (clickedOnLine == false) {
+    if (clickedOnLine === false) {
         hoverPoint.style.left = mousex + "px"; // move point with mouse
     }
 });
@@ -201,23 +201,49 @@ line.onmouseleave = function onMouseLeave(event) {
     }
 }
 
-window.addEventListener('resize', inactiveStylingActivate)
+let isResizingWindow = false;
+window.addEventListener('resize', () => {
+    isResizingWindow = true;
+    inactiveStylingActivate();
+})
 
 function clearInputs() {
     titleInput.value = ""; 
     description_data.value = "";
 }
 
+// let isPointNotActive = false;
 function inactiveStylingActivate() {
+    // isPointNotActive = true;
+    hideElement(pointSubmissionContainer);
+    hideElement(hoverPoint);
     pointSubmissionContainer.classList.add('isHidden');
-    dataConnectionLine.classList.add('isHidden');
     hoverPoint.classList.remove('hoverPoint-onClick');
     hoverPoint.classList.add('isHidden');
+    dataConnectionLine.classList.add('isHidden');
+    dataConnectionLine.style.animation = null;
 
     clickedOnLine = false;
     isEditingPoint = false;
     isKeyboardPlottingActive = false;
+    isResizingWindow = false;
     clearInputs();
+}
+
+function hideElement(element) {
+    if (isResizingWindow === false) {
+        const clonedElement = element.cloneNode(true)
+        element.parentNode.appendChild(clonedElement);
+        clonedElement.id = 'temporaryFadeOutElement';
+        clonedElement.classList.add('fadeOut');
+        clonedElement.addEventListener('animationend', () => {
+            clonedElement.classList.remove('fadeOut');
+            clonedElement.classList.add('isHidden');
+            clonedElement.remove();
+            document.querySelectorAll('#temporaryFadeOutElement').forEach(element => element.remove());
+            // isPointNotActive = false;
+        });
+    }
 }
 
 titleInput.addEventListener('keydown', handleInputBoxesSubmit)
