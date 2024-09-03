@@ -39,6 +39,12 @@ body {
     background-color: #625D5D;
     margin: 0;
     overflow: hidden;
+    transition: 1s;
+}
+
+.bodyTimeline {
+    /* background-color: initial; */
+    background-color: hsl(323, 8%, 50%);
 }
 
 input {

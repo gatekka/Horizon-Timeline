@@ -122,6 +122,7 @@ function enterHorizon() {
     console.log('Executed enterHorizon()');
     landingPage.classList.add('isHidden');
     lineContainer.classList.remove('isHidden');
+    document.body.classList.add('bodyTimeline');
     backgroundImage.classList.add('backgroundImage-postEffects');
     calculatePointDataMaxAllowablePosition();
 }
