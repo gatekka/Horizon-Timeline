@@ -21,6 +21,7 @@ let isKeyboardPlottingActive = false;
 let isEditingPoint = false;
 
 const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
+dataStore.sort((a, b) => a.timecode - b.timecode);
 
 description_data.addEventListener('input', e => parseTextToDate(e.target.value));
 const dateOutputText = document.getElementById('dateOutputText');
@@ -39,33 +40,32 @@ function parseTextToDate(input) {
     return Date.parse(convertToDate);
 }
 
-let idCount = 1;
+let currentID;
 renderPointsFromLocalStorage();
 function renderPointsFromLocalStorage() {
     dataStore.forEach(element => {
+        currentID = element.id;
         placePointOnLine(element.title, element.description)
-        idCount++;
     });
 }
 
 //TODO: When clicking on timeline between 2 points, make it so that its somehow quicker to select date?
-//TODO: Sort points ordered by date
 submit_button.onclick = submitData;
 function submitData() {
     if (titleInput.value === '' && description_data.value === '') {
         inactiveStylingActivate();
     } else if (isEditingPoint) { 
-        const point = document.getElementById(`point${getCurrentDataStoreID + 1}`);
+        const point = document.getElementById(`point${editingElementId}`);
         const pointTitle = point.querySelector('.placedPointDisplay .pointTitle');
         const pointDescription = point.querySelector('.placedPointDisplay .pointDescription');
         pointTitle.innerText = titleInput.value;
         pointDescription.innerText = description_data.value;
-        dataStore[getCurrentDataStoreID].title = titleInput.value;
-        dataStore[getCurrentDataStoreID].description = description_data.value;
-        dataStore[getCurrentDataStoreID].timecode = parseTextToDate(description_data.value);
+        getArrayToEdit.title = titleInput.value;
+        getArrayToEdit.description = description_data.value;
+        getArrayToEdit.timecode = parseTextToDate(description_data.value);
         localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore));
         inactiveStylingActivate();
-        console.log(`Confirmed edit for: ${JSON.stringify(dataStore[getCurrentDataStoreID])}`);
+        console.log(`Confirmed edit for: ${JSON.stringify(dataStore[editingElementId])}`);
     } else {
         let objPointData = {
             id: dataStore.length + 1,
@@ -73,13 +73,23 @@ function submitData() {
             description: description_data.value,
             timecode: parseTextToDate(description_data.value)
         }
+        currentID = objPointData.id;
         dataStore.push(objPointData); // stores object into array
         localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
         placePointOnLine(objPointData.title, objPointData.description);
         inactiveStylingActivate();
         console.log('Point data stored: ' + JSON.stringify(objPointData)); // for logging purposes
     }
-    idCount++;
+    dataStore.sort((a, b) => a.timecode - b.timecode);
+    dataStore.forEach(element => {
+    const pointElement = document.getElementById(`point${element.id}`);
+    if ((pointElement.id).substring(5) != currentID) {
+        pointElement.style.animation = 'none';
+        pointElement.querySelector('.placedPointDisplay').style.animation = 'none';
+        pointElement.querySelector('.dataConnectionLine').style.animation = 'none';
+    }
+    flex_horizontal_points.appendChild(pointElement);
+    });
 }
 
 let mousex;
@@ -130,8 +140,8 @@ line.addEventListener('click', showSubmissionContainer)
 function showSubmissionContainer() {
     unfocusedPoint = false;
     if (isEditingPoint) {
-        titleInput.value = dataStore[getCurrentDataStoreID].title;
-        description_data.value = dataStore[getCurrentDataStoreID].description;
+        titleInput.value = getArrayToEdit.title;
+        description_data.value = getArrayToEdit.description;
         positionPointData();
     } else if (!isKeyboardPlottingActive) {
         clickedOnLine = true;
@@ -150,15 +160,17 @@ function showSubmissionContainer() {
     setTimeout(() => {titleInput.focus()}, 1); // auto focuses to input field after 1 ms
 }
 
-let getCurrentDataStoreID;
+let editingElementId;
+let getArrayToEdit = {};
 function editPoint(elementID) {
     inactiveStylingActivate();
     isEditingPoint = true;
-    getCurrentDataStoreID = elementID.substring(5) - 1;
+    editingElementId = parseInt(elementID.substring(5));
+    getArrayToEdit = dataStore.find(element => element.id === editingElementId);
     // const pointToEdit = document.getElementById(elementID);
     // pointToEdit.style.background = 'red';
+    console.log(`Now editing: ${JSON.stringify(getArrayToEdit)}`);
     showSubmissionContainer();
-    console.log(`Now editing: '${JSON.stringify(dataStore[getCurrentDataStoreID])}'`);
 }
 
 function placePointOnLine(title, description) {
@@ -166,7 +178,7 @@ function placePointOnLine(title, description) {
     pointDescription.innerText = description;
 
     const clonedPoint = hoverPoint.cloneNode(true);
-    clonedPoint.id = `point${idCount}`;
+    clonedPoint.id = `point${currentID}`;
     clonedPoint.classList.remove('hoverPoint-onClick');
     clonedPoint.classList.remove('isHidden');
     clonedPoint.classList.add('hoverPoint-onPlace');
@@ -212,9 +224,7 @@ function clearInputs() {
     description_data.value = "";
 }
 
-// let isPointNotActive = false;
 function inactiveStylingActivate() {
-    // isPointNotActive = true;
     hideElement(pointSubmissionContainer);
     hideElement(hoverPoint);
     pointSubmissionContainer.classList.add('isHidden');
@@ -241,7 +251,6 @@ function hideElement(element) {
             clonedElement.classList.add('isHidden');
             clonedElement.remove();
             document.querySelectorAll('#temporaryFadeOutElement').forEach(element => element.remove());
-            // isPointNotActive = false;
         });
     }
 }
