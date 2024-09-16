@@ -36,9 +36,11 @@
 }
 
 body {
+    height: 100vh;
+    width: 100vw;
     background-color: #625D5D;
     margin: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: 1s;
 }
 
@@ -126,6 +128,28 @@ button {
     opacity: 1;
 }
 
+.settingsContainer {
+    mix-blend-mode: hard-light;
+    position: fixed;
+    /* position: absolute; */
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(168, 156, 156);
+    padding: 15vh 2vw;
+    /* z-index: 1; */
+    border-radius: 5px;
+    /* font-family: 'Comfortaa'; */
+    font-family: Arial;
+    animation: fade-down 1s;
+}
+
+.settingsTitle {
+    align-self: center;
+    /* text-decoration: underline; */
+    font-size: 1.3em;
+    color: rgb(0, 0, 0);
+}
+
 .cornerContainer {
     top: 30px;
     left: 30px;
@@ -136,6 +160,10 @@ button {
 }
 
 .mouseXYposition {
+    cursor: pointer;
+}
+
+.dateOutputText {
     cursor: pointer;
 }
 
@@ -161,7 +189,14 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 39vh 11vw;
+    height: 100vh;
+    width: 100vw;
+    /* padding: 39vh 11vw; */
+    max-height: 100vh;
+    /* padding: 0 11vw; */
+    /* padding: 200px; */
+    /* padding-top: 39vh; */
+    /* width: fit-content; */
     animation: fade-down 1s;
 }
 
@@ -185,7 +220,6 @@ button {
     padding: 8px;
     border-radius: 8px;
     position: absolute;
-    z-index: 0;
     pointer-events: none;
 }
 

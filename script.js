@@ -16,6 +16,9 @@ const pointDescription = document.getElementById("pointDescription");
 const landingPage = document.getElementById("landingPage");
 const landingCircle = document.getElementById("landingCircle");
 const backgroundImage = document.getElementById("backgroundImage");
+const dateOutputText = document.getElementById('dateOutputText');
+const dateOutputTimecode = document.getElementById('dateOutputTimecode');
+const settingsContainer = document.getElementById('settingsContainer');
 
 let isKeyboardPlottingActive = false;
 let isEditingPoint = false;
@@ -24,8 +27,6 @@ const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; //
 dataStore.sort((a, b) => a.timecode - b.timecode);
 
 description_data.addEventListener('input', e => parseTextToDate(e.target.value));
-const dateOutputText = document.getElementById('dateOutputText');
-const dateOutputTimecode = document.getElementById('dateOutputTimecode');
 function parseTextToDate(input) {
     let dateString = input.trim();
     const currentYear = new Date().getFullYear();
@@ -300,4 +301,13 @@ mouseXYposition.onclick = () => {
 if (dataStore.length > 0) {
     console.log('\'dataStore\' contains data. Entering Horizon.');
     enterHorizon();
+}
+
+dateOutputText.addEventListener('click', openSettingsMenu)
+function openSettingsMenu() {
+    settingsContainer.classList.remove('isHidden');
+}
+
+function importFile() {
+
 }
