@@ -42,11 +42,11 @@ function parseTextToDate(input) {
     return Date.parse(convertToDate);
 }
 
-let currentID;
+let currentSelectedPointId;
 renderPointsFromLocalStorage();
 function renderPointsFromLocalStorage() {
     dataStore.forEach(element => {
-        currentID = element.id;
+        currentSelectedPointId = element.id;
         placePointOnLine(element.title, element.description)
     });
 }
@@ -86,12 +86,14 @@ function updatePoint() {
     const point = document.getElementById(`point${editingElementId}`);
     const pointTitle = point.querySelector('.placedPointDisplay .pointTitle');
     const pointDescription = point.querySelector('.placedPointDisplay .pointDescription');
+    currentSelectedPointId = editingElementId;
     pointTitle.innerText = elements.titleInput.value;
     pointDescription.innerText = elements.description_data.value;
     getArrayToEdit.title = elements.titleInput.value;
     getArrayToEdit.description = elements.description_data.value;
     getArrayToEdit.timecode = parseTextToDate(elements.description_data.value);
     localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore));
+    restoreAnimations(point);
     inactiveStylingActivate();
     console.log(`Confirmed edit for: ${JSON.stringify(dataStore[editingElementId])}`);
 }
@@ -103,7 +105,7 @@ function addNewPoint() {
         description: elements.description_data.value,
         timecode: parseTextToDate(elements.description_data.value)
     }
-    currentID = objPointData.id;
+    currentSelectedPointId = objPointData.id;
     dataStore.push(objPointData); // stores object into array
     localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
     placePointOnLine(objPointData.title, objPointData.description);
@@ -114,13 +116,24 @@ function addNewPoint() {
 function renderAllPoints() {
     dataStore.forEach(element => {
         const pointElement = document.getElementById(`point${element.id}`);
-        if (element.id != currentID) {
+        if (element.id != currentSelectedPointId) {
             // pointElement.style.animation = 'none';
             // pointElement.querySelector('.placedPointDisplay').style.animation = 'none';
             // pointElement.querySelector('.dataConnectionLine').style.animation = 'none';
             disableAnimations(pointElement)
         }
         elements.flex_horizontal_points.appendChild(pointElement);
+    });
+}
+
+function restoreAnimations(element) {
+    element.offsetHeight; // Force reflow to reset animations
+    element.style.animation = '';
+
+    const children = element.querySelectorAll('.placedPointDisplay, .dataConnectionLine');
+    children.forEach(child => {
+        child.offsetHeight; // Force reflow to reset animations
+        child.style.animation = '';
     });
 }
 
@@ -204,7 +217,7 @@ function placePointOnLine(title, description) {
     elements.pointDescription.innerText = description;
 
     const clonedPoint = elements.hoverPoint.cloneNode(true);
-    clonedPoint.id = `point${currentID}`;
+    clonedPoint.id = `point${currentSelectedPointId}`;
     clonedPoint.classList.remove('hoverPoint-onClick');
     clonedPoint.classList.remove('isHidden');
     clonedPoint.classList.add('hoverPoint-onPlace');
