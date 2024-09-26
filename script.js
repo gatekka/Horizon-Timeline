@@ -332,7 +332,7 @@ window.addEventListener('keydown', (event) => {
 })
 
 elements.mouseXYposition.onclick = () => {
-    alert(JSON.stringify(dataStore))
+    // alert(JSON.stringify(dataStore)) // for debugging
     localStorage.clear();
     location.reload();
 }
