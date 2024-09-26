@@ -35,6 +35,10 @@
     }
 }
 
+:root {
+    --filterProperties: brightness(1.1) saturate(1);
+}
+
 body {
     background-color: #625D5D;
     margin: 0;
@@ -43,8 +47,9 @@ body {
 }
 
 .bodyTimeline {
-    /* background-color: initial; */
-    background-color: hsl(323, 8%, 50%);
+    background-color: initial;
+    /* background-color: hsl(323, 8%, 50%); */
+    /* background-color: rgb(1, 1, 99); */
 }
 
 input {
@@ -65,17 +70,28 @@ button {
     height: 100vh;
     width: 100vw;
     pointer-events: none;
-    background-image: url(https://live.staticflickr.com/5601/15620722866_12289eefe6_k.jpg);
+    /* background-image: url(https://live.staticflickr.com/5601/15620722866_12289eefe6_k.jpg); */
+    /* background-image: url(https://i.pinimg.com/originals/09/68/06/0968064b18c824309e931a77c6e7cf64.png); */
+    /* background-image: url(https://i.pinimg.com/originals/f1/d1/b9/f1d1b9b81e7d1224a98564960f2decb6.jpg); */
+    /* background-image: url(https://i.pinimg.com/564x/80/9e/78/809e786dac0773f7f35a5370b906eab2.jpg); */
+    /* background-image: url(https://i.pinimg.com/564x/4f/93/97/4f9397637f935488ba00fd4fe9712072.jpg); */
+    /* background-image: url(https://i.pinimg.com/564x/9f/f8/a6/9ff8a6a7c36a5f3321c04657a9378ecc.jpg); */
+    /* background-image: url(https://i.pinimg.com/564x/14/f1/10/14f11050f71322acee90fa499ab496ce.jpg); */
+    background-image: url(https://i.pinimg.com/564x/5c/95/cc/5c95cc3d29b3e42f7bce3720ef657954.jpg);
+    background-size: cover;
     background-position-x: center;
     background-position-y: center;
     mix-blend-mode: hard-light;
     filter: grayscale(1) blur(4px);
     z-index: 1;
+    scale: 1.01;
+    /* scale: 1.2; */
     transition: 1s;
 }
 
 .backgroundImage-postEffects {
-    filter: grayscale(0) blur(1px);
+    filter: grayscale(0) blur(10px);
+    scale: 1.07 ;
 }
 
 .landingPage {
@@ -90,31 +106,34 @@ button {
 }
 
 .landingCircle {
-    background: linear-gradient(
+    /* background: linear-gradient(
         137deg,
-        #FFFFFF 0%,
-        #D9D9D9 50%,
-        #909090 100%
-    );
+        rgba(255, 255, 255, 1) 0%,
+        rgba(217, 217, 217, 1) 50%,
+        rgba(144, 144, 144, 1) 100%
+    ); */
     height: 122px;
     width: 122px;
     border-radius: 61px;
-    opacity: 0.34;
-    box-shadow: 0px 0px 74.1px rgba(0, 0, 0, 0.212);
+    z-index: 1;
+    mix-blend-mode: overlay;
+    backdrop-filter: blur(9px) brightness(1);
+    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.302) inset, 0px 0px 74.1px rgba(0, 0, 0, 0.212);
     cursor: pointer; 
     transition: 0.3s;
 }
 
 .landingCircle:hover {
+    filter: blur(20px) brightness(2);
+    border-style: none;
     opacity: 1;
-    box-shadow: 0px 0px 74.1px rgba(213, 213, 213, 0.68);
+    box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0) inset, 0px 0px 74.1px rgba(213, 213, 213, 0.304);
 }
 
 .landingPageText {
     font-family: Roboto Mono;
     font-size: 24px;
-    color: #FFFFFF;
-    opacity: 0.34;
+    color: rgba(255, 255, 255, 0.4);
     pointer-events: none;
     user-select: none;
     text-shadow: 0px 0px 6px rgb(0, 0, 0, 0.212);
@@ -122,8 +141,8 @@ button {
 }
 
 .landingCircle:hover + .landingPageText {
-    text-shadow: 0px 0px 14.1px rgba(213, 213, 213, 0.68);
-    opacity: 1;
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 0px 0px 14.1px rgba(213, 213, 213, 0.304);
 }
 
 .cornerContainer {
@@ -272,7 +291,9 @@ button {
     border-radius: 5px;
     box-shadow: 0px 0px 15.5px rgba(0, 0, 0, 0.07);
     z-index: 1;
-    mix-blend-mode: hard-light;
+    mix-blend-mode: overlay;
+    backdrop-filter: blur(50px);
+    filter: var(--filterProperties);
     animation: fade-down 0.25s;
     transition: 0.5s;
     transition-behavior: allow-discrete;
