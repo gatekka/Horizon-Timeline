@@ -176,6 +176,11 @@ function enterHorizon() {
     document.body.classList.add('bodyTimeline');
     elements.backgroundImage.classList.add('backgroundImage-postEffects');
     calculatePointDataMaxAllowablePosition();
+    setTimeout(() => {
+        isKeyboardPlottingActive = true;
+        showSubmissionContainer();
+        isHotkeysEnabled = true;
+    }, 1000);
 }
 
 function positionPointData() {
