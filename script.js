@@ -23,6 +23,7 @@ const elements = {
 
 let isKeyboardPlottingActive = false;
 let isEditingPoint = false;
+let isHotkeysEnabled = false;
 
 const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
 dataStore.sort((a, b) => a.timecode - b.timecode);
@@ -319,7 +320,7 @@ function handleInputBoxesSubmit(event) {
 
 //TODO: Implement case that toggles delete mode? Or maybe only when holding down key is better.
 window.addEventListener('keydown', (event) => {
-    if (!(getComputedStyle(elements.pointSubmissionContainer).display == 'flex')) {
+    if (isHotkeysEnabled && !(getComputedStyle(elements.pointSubmissionContainer).display == 'flex')) {
         switch (event.key) {
             case 'Tab':
                 console.log(`Pressed ${event.key}.`);
