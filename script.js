@@ -320,7 +320,7 @@ function handleInputBoxesSubmit(event) {
 
 //TODO: Implement case that toggles delete mode? Or maybe only when holding down key is better.
 window.addEventListener('keydown', (event) => {
-    if (isHotkeysEnabled && !(getComputedStyle(elements.pointSubmissionContainer).display == 'flex')) {
+    if (isHotkeysEnabled && getComputedStyle(elements.pointSubmissionContainer).display == 'none') {
         switch (event.key) {
             case 'Tab':
                 console.log(`Pressed ${event.key}.`);
