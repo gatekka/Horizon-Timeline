@@ -286,7 +286,7 @@ function inactiveStylingActivate() {
 }
 
 function hideElement(element) {
-    if (isResizingWindow === false) {
+    if (isResizingWindow === false) { // checks if window is actively being resized to prevent excessive executions
         const clonedElement = element.cloneNode(true)
         element.parentNode.appendChild(clonedElement);
         clonedElement.id = 'temporaryFadeOutElement';
