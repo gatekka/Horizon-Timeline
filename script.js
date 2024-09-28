@@ -300,6 +300,16 @@ function hideElement(element) {
     }
 }
 
+function downloadLocalStorageData() {
+	const blob = new Blob([JSON.stringify(dataStore)], { type: 'application.json/' })
+	const a = document.createElement('a');
+	a.href = URL.createObjectURL(blob);
+	a.download = 'localStorageData.json'
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+} 
+
 [elements.titleInput, elements.description_data].forEach(element => {
     element.addEventListener('keydown', handleInputBoxesSubmit);
 });
