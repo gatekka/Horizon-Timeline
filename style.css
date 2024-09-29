@@ -359,14 +359,16 @@ button {
 }
 
 .settingsContainer {
-    /*background-color: black;*/
-    /*background-color: white;*/
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     mix-blend-mode: overlay;
     backdrop-filter: blur(20px);
     border-radius: 5px;
     position: absolute;
     padding: 20px;
     z-index: 1;
+    animation: fade-down 0.25s;
 }
 
 .grain {
