@@ -21,6 +21,7 @@ const elements = {
     dateOutputTimecode: document.getElementById('dateOutputTimecode'),
     downloadDataButton: document.getElementById('downloadDataButton'),
     settingsContainer: document.getElementById('settingsContainer'),
+    inputChangeBackgroundImage: document.getElementById('inputChangeBackgroundImage'),
 }
 
 let isKeyboardPlottingActive = false;
@@ -349,6 +350,16 @@ function handleInputBoxesSubmit(event) {
             // console.log(`"${event.key}" has been pressed.`)
             break;
     }
+}
+
+const defaultBackgroundImage = getComputedStyle(elements.backgroundImage).backgroundImage
+elements.inputChangeBackgroundImage.addEventListener("input", changeBackgroundImage);
+function changeBackgroundImage() {
+    if (elements.inputChangeBackgroundImage.value === '') {
+        elements.backgroundImage.style.backgroundImage = `${defaultBackgroundImage}`
+        return;
+    }
+    elements.backgroundImage.style.backgroundImage = `url("${elements.inputChangeBackgroundImage.value}")`
 }
 
 //TODO: Implement case that toggles delete mode? Or maybe only when holding down key is better.
