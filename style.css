@@ -358,6 +358,17 @@ button {
     cursor: pointer;
 }
 
+.settingsContainer {
+    /*background-color: black;*/
+    /*background-color: white;*/
+    mix-blend-mode: overlay;
+    backdrop-filter: blur(20px);
+    border-radius: 5px;
+    position: absolute;
+    padding: 20px;
+    z-index: 1;
+}
+
 .grain {
     position: fixed;
     height: 100%;

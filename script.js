@@ -19,6 +19,8 @@ const elements = {
     backgroundImage: document.getElementById("backgroundImage"),
     dateOutputText: document.getElementById('dateOutputText'),
     dateOutputTimecode: document.getElementById('dateOutputTimecode'),
+    downloadDataButton: document.getElementById('downloadDataButton'),
+    settingsContainer: document.getElementById('settingsContainer'),
 }
 
 let isKeyboardPlottingActive = false;
@@ -240,13 +242,31 @@ function placePointOnLine(title, description) {
     
 
 let unfocusedPoint = true;
-document.addEventListener('click', function unfocusElement(event) {  
-    if (unfocusedPoint === false && !elements.line.contains(event.target) && !elements.pointSubmissionContainer.contains(event.target) && !elements.flex_horizontal_points.contains(event.target)) {
+// document.addEventListener('click', function unfocusElement(event) {  
+//     if (unfocusedPoint === false && !elements.line.contains(event.target) && !elements.pointSubmissionContainer.contains(event.target) && !elements.flex_horizontal_points.contains(event.target)) {
+//         inactiveStylingActivate();
+//         unfocusedPoint = true;
+//         console.log('Point unfocused!'); // Log to console
+//     }
+// });
+
+document.addEventListener('click', unfocusElement)
+function unfocusElement() {
+    const checkUnfocusedElementsFor = [
+        elements.line,
+        elements.pointSubmissionContainer,
+        elements.flex_horizontal_points,
+        elements.settingsContainer
+    ]
+
+    const clickedOutside = checkUnfocusedElementsFor.every(element => !element.contains(event.target));
+
+    if (unfocusedPoint === false && clickedOutside) {
         inactiveStylingActivate();
         unfocusedPoint = true;
-        console.log('Point unfocused!'); // Log to console
+        console.log(`Unfocused ${event.target}`)
     }
-});
+}
 
 elements.line.onmouseover = function displayPoint() {
     elements.hoverPoint.classList.remove('isHidden');
@@ -272,11 +292,13 @@ function clearInputs() {
 function inactiveStylingActivate() {
     hideElement(elements.pointSubmissionContainer);
     hideElement(elements.hoverPoint);
+    hideElement(elements.settingsContainer);
     elements.pointSubmissionContainer.classList.add('isHidden');
     elements.hoverPoint.classList.remove('hoverPoint-onClick');
     elements.hoverPoint.classList.add('isHidden');
     elements.dataConnectionLine.classList.add('isHidden');
     elements.dataConnectionLine.style.animation = null;
+    elements.settingsContainer.classList.add('isHidden');
 
     clickedOnLine = false;
     isEditingPoint = false;
@@ -300,6 +322,7 @@ function hideElement(element) {
     }
 }
 
+elements.downloadDataButton.addEventListener('click', downloadLocalStorageData);
 function downloadLocalStorageData() {
 	const blob = new Blob([JSON.stringify(dataStore)], { type: 'application.json/' })
 	const a = document.createElement('a');
@@ -339,7 +362,9 @@ window.addEventListener('keydown', (event) => {
                 break;
             case '?':
                 //TODO: Open settings context menu
-                console.log('TODO: Open settings context menu');
+                console.log('Open settings context menu');
+                settingsContainer.classList.remove('isHidden');
+                unfocusedPoint = false;
                 break;
             default:
                 break;
