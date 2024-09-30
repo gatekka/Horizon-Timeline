@@ -243,14 +243,6 @@ function placePointOnLine(title, description) {
     
 
 let unfocusedPoint = true;
-// document.addEventListener('click', function unfocusElement(event) {  
-//     if (unfocusedPoint === false && !elements.line.contains(event.target) && !elements.pointSubmissionContainer.contains(event.target) && !elements.flex_horizontal_points.contains(event.target)) {
-//         inactiveStylingActivate();
-//         unfocusedPoint = true;
-//         console.log('Point unfocused!'); // Log to console
-//     }
-// });
-
 document.addEventListener('click', unfocusElement)
 function unfocusElement() {
     const checkUnfocusedElementsFor = [
