@@ -320,7 +320,7 @@ function downloadLocalStorageData() {
 	const blob = new Blob([JSON.stringify(dataStore)], { type: 'application.json/' })
 	const a = document.createElement('a');
 	a.href = URL.createObjectURL(blob);
-	a.download = 'localStorageData.json'
+	a.download = 'localStorageData.json';
 	document.body.appendChild(a);
 	a.click();
 	document.body.removeChild(a);
@@ -348,10 +348,10 @@ const defaultBackgroundImage = getComputedStyle(elements.backgroundImage).backgr
 elements.inputChangeBackgroundImage.addEventListener("input", changeBackgroundImage);
 function changeBackgroundImage() {
     if (elements.inputChangeBackgroundImage.value === '') {
-        elements.backgroundImage.style.backgroundImage = `${defaultBackgroundImage}`
+        elements.backgroundImage.style.backgroundImage = `${defaultBackgroundImage}`;
         return;
     }
-    elements.backgroundImage.style.backgroundImage = `url("${elements.inputChangeBackgroundImage.value}")`
+    elements.backgroundImage.style.backgroundImage = `url("${elements.inputChangeBackgroundImage.value}")`;
     saveBackgroundImage(elements.backgroundImage.style.backgroundImage);
 }
 
