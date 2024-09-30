@@ -352,6 +352,21 @@ function changeBackgroundImage() {
         return;
     }
     elements.backgroundImage.style.backgroundImage = `url("${elements.inputChangeBackgroundImage.value}")`
+    saveBackgroundImage(elements.backgroundImage.style.backgroundImage);
+}
+
+function saveBackgroundImage(url) {
+    console.log(`Saved background image to localStorage: ${localStorage.backgroundImage}`);
+    localStorage.setItem('backgroundImage', url);
+}
+
+window.addEventListener('load', loadBackgroundImage);
+function loadBackgroundImage() {
+    console.log(`Loaded background image from localStorage: ${localStorage.backgroundImage}`);
+    const savedImage = localStorage.getItem('backgroundImage');
+    if (savedImage) {
+       elements.backgroundImage.style.backgroundImage = savedImage;
+    }
 }
 
 //TODO: Implement case that toggles delete mode? Or maybe only when holding down key is better.
