@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horizon - A Timeline Project</title>
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  </head>
+  <body>
     <div class="backgroundImage" id="backgroundImage"></div>
     <div class="grain"></div>
     <div class="landingPage" id="landingPage">
-        <div class="landingCircle" id="landingCircle"></div>
-        <div class="landingPageText">ENTER HORIZON</div>
+      <div class="landingCircle" id="landingCircle"></div>
+      <div class="landingPageText">ENTER HORIZON</div>
     </div>
     <div class="lineContainer isHidden" id="lineContainer">
-        <div class="settingsContainer isHidden" id="settingsContainer">
-            <button id="downloadDataButton" type="button">Download Data</button>
-            <input type="text" id="inputChangeBackgroundImage" name="" value="" placeholder="Background Image">
+      <div class="settingsContainer isHidden" id="settingsContainer">
+        <button id="downloadDataButton" type="button">Download Data</button>
+        <input type="text" id="inputChangeBackgroundImage" name="" value="" placeholder="Background Image">
+      </div>
+      <div class="cornerContainer">
+        <div class="mouseXYposition" id="mouseXYposition"></div>
+        <div id="dateOutputText">Date</div>
+        <div id="dateOutputTimecode">Timecode</div>
+      </div>
+      <div class="line" id="line"></div>
+      <div class="hoverPoint isHidden" id="hoverPoint">
+        <div class="placedPointDisplay isHidden" id="placedPointDisplay">
+          <div class="pointTitle" id="pointTitle">Title</div>
+          <div class="pointDescription" id="pointDescription">Date</div>
         </div>
-        <div class="cornerContainer">
-            <div class="mouseXYposition" id="mouseXYposition"></div>
-            <div id="dateOutputText">Date</div>
-            <div id="dateOutputTimecode">Timecode</div>
+        <div class="dataConnectionLine isHidden" id="dataConnectionLine"></div>
+        <div class="hoverPointInnerCircle" id="hoverPointInnerCircle"></div>
+      </div>
+      <div class="flex_horizontal_points" id="flex_horizontal_points"></div>
+      <div class="pointSubmissionContainer isHidden" id="pointSubmissionContainer">
+        <input class="title" id="titleInput" placeholder="Title" type="text">
+        <input class="description" id="description_data" placeholder="Description" type="text">
+        <div class="flex_horizontal">
+          <button class="add-attachment">+ Add Attachment</button>
+          <button class="add-attachment">+ Add Attachment</button>
+          <button class="submit_button" id="submit_button">Submit</button>
         </div>
-        <div class="line" id="line"></div>
-        <div class="hoverPoint isHidden" id="hoverPoint">
-            <div class="placedPointDisplay isHidden" id="placedPointDisplay">
-                <div class="pointTitle" id="pointTitle">Title</div>
-                <div class="pointDescription" id="pointDescription">Date</div>
-            </div>
-            <div class="dataConnectionLine isHidden" id="dataConnectionLine"></div>
-            <div class="hoverPointInnerCircle" id="hoverPointInnerCircle"></div>
-        </div>
-        <div class="flex_horizontal_points" id="flex_horizontal_points"></div>
-        <div class="pointSubmissionContainer isHidden" id="pointSubmissionContainer">
-            <input class="title" id="titleInput" placeholder="Title" type="text">
-            <input class="description" id="description_data" placeholder="Description" type="text">
-            <div class="flex_horizontal">
-                <button class="add-attachment">+ Add Attachment</button>
-                <button class="add-attachment">+ Add Attachment</button>
-                <button class="submit_button" id="submit_button">Submit</button>
-            </div>
-        </div>
+      </div>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
