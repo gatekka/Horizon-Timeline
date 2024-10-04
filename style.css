@@ -3,390 +3,386 @@
 
 /* KEYFRAMES */
 @keyframes fade-down {
-    0% {
-        opacity: 0;
-        transform: translateY(-30px) scale(0.9);
-    }
-    
-    100% {
-        opacity: 1;
-        transform: translateY(0px) scale(1);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
 }
 
 @keyframes fade-up {
-    0% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.9);
-    }
-    
-    100% {
-        opacity: 1;
-        transform: translateY(0px) scale(1);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
 }
 
 @keyframes fadeOutAnimation {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 :root {
-    --filterProperties: brightness(1.1) saturate(1);
+  --filterProperties: brightness(1.1) saturate(1);
 }
 
 body {
-    background-color: #625D5D;
-    margin: 0;
-    overflow: hidden;
-    transition: 1s;
+  background-color: #625D5D;
+  margin: 0;
+  overflow: hidden;
+  transition: 1s;
 }
 
 .bodyTimeline {
-    background-color: initial;
-    /* background-color: hsl(323, 8%, 50%); */
-    /* background-color: rgb(1, 1, 99); */
+  background-color: initial;
+  /* background-color: hsl(323, 8%, 50%); */
+  /* background-color: rgb(1, 1, 99); */
 }
 
 input {
-    padding: 8px 10px 5px 10px;
-    border: none;
-    outline: none;
-    border-radius: 2px;
+  padding: 8px 10px 5px 10px;
+  border: none;
+  outline: none;
+  border-radius: 2px;
 }
 
 button {
-    border: none;
-    cursor: pointer;
-    color: #939393;
+  border: none;
+  cursor: pointer;
+  color: #939393;
 }
 
 .backgroundImage {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    pointer-events: none;
-    /* background-image: url(https://live.staticflickr.com/5601/15620722866_12289eefe6_k.jpg); */
-    /* background-image: url(https://i.pinimg.com/originals/09/68/06/0968064b18c824309e931a77c6e7cf64.png); */
-    /* background-image: url(https://i.pinimg.com/originals/f1/d1/b9/f1d1b9b81e7d1224a98564960f2decb6.jpg); */
-    /* background-image: url(https://i.pinimg.com/564x/80/9e/78/809e786dac0773f7f35a5370b906eab2.jpg); */
-    /* background-image: url(https://i.pinimg.com/564x/4f/93/97/4f9397637f935488ba00fd4fe9712072.jpg); */
-    /* background-image: url(https://i.pinimg.com/564x/9f/f8/a6/9ff8a6a7c36a5f3321c04657a9378ecc.jpg); */
-    /* background-image: url(https://i.pinimg.com/564x/14/f1/10/14f11050f71322acee90fa499ab496ce.jpg); */
-    /* background-image: url(https://i.pinimg.com/564x/5c/95/cc/5c95cc3d29b3e42f7bce3720ef657954.jpg); */
-    background-image: url(https://i.pinimg.com/564x/3b/51/1b/3b511bde416b2760aa136056e612f11d.jpg);
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: center;
-    mix-blend-mode: hard-light;
-    filter: grayscale(1) blur(4px);
-    z-index: 1;
-    scale: 1.01;
-    /* scale: 1.2; */
-    transition: 1s;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  pointer-events: none;
+  /* background-image: url(https://live.staticflickr.com/5601/15620722866_12289eefe6_k.jpg); */
+  /* background-image: url(https://i.pinimg.com/originals/09/68/06/0968064b18c824309e931a77c6e7cf64.png); */
+  /* background-image: url(https://i.pinimg.com/originals/f1/d1/b9/f1d1b9b81e7d1224a98564960f2decb6.jpg); */
+  /* background-image: url(https://i.pinimg.com/564x/80/9e/78/809e786dac0773f7f35a5370b906eab2.jpg); */
+  /* background-image: url(https://i.pinimg.com/564x/4f/93/97/4f9397637f935488ba00fd4fe9712072.jpg); */
+  /* background-image: url(https://i.pinimg.com/564x/9f/f8/a6/9ff8a6a7c36a5f3321c04657a9378ecc.jpg); */
+  /* background-image: url(https://i.pinimg.com/564x/14/f1/10/14f11050f71322acee90fa499ab496ce.jpg); */
+  /* background-image: url(https://i.pinimg.com/564x/5c/95/cc/5c95cc3d29b3e42f7bce3720ef657954.jpg); */
+  background-image: url(https://i.pinimg.com/564x/3b/51/1b/3b511bde416b2760aa136056e612f11d.jpg);
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
+  mix-blend-mode: hard-light;
+  filter: grayscale(1) blur(4px);
+  z-index: 1;
+  scale: 1.01;
+  /* scale: 1.2; */
+  transition: 1s;
 }
 
 .backgroundImage-postEffects {
-    filter: grayscale(0) blur(10px);
-    scale: 1.07 ;
+  filter: grayscale(0) blur(10px);
+  scale: 1.07;
 }
 
 .landingPage {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: 0.2s;
-    transition-behavior: allow-discrete;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.2s;
+  transition-behavior: allow-discrete;
 }
 
 .landingCircle {
-    /* background: linear-gradient(
+  /* background: linear-gradient(
         137deg,
         rgba(255, 255, 255, 1) 0%,
         rgba(217, 217, 217, 1) 50%,
         rgba(144, 144, 144, 1) 100%
     ); */
-    height: 122px;
-    width: 122px;
-    border-radius: 61px;
-    z-index: 1;
-    mix-blend-mode: overlay;
-    backdrop-filter: blur(9px) brightness(1);
-    box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.302) inset, 0px 0px 74.1px rgba(0, 0, 0, 0.212);
-    cursor: pointer; 
-    transition: 0.3s;
+  height: 122px;
+  width: 122px;
+  border-radius: 61px;
+  z-index: 1;
+  mix-blend-mode: overlay;
+  backdrop-filter: blur(9px) brightness(1);
+  box-shadow: 0px 0px 0px 2px rgba(255, 255, 255, 0.302) inset, 0px 0px 74.1px rgba(0, 0, 0, 0.212);
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .landingCircle:hover {
-    filter: blur(20px) brightness(2);
-    border-style: none;
-    opacity: 1;
-    box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0) inset, 0px 0px 74.1px rgba(213, 213, 213, 0.304);
+  filter: blur(20px) brightness(2);
+  border-style: none;
+  opacity: 1;
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0) inset, 0px 0px 74.1px rgba(213, 213, 213, 0.304);
 }
 
 .landingPageText {
-    font-family: Roboto Mono;
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.4);
-    pointer-events: none;
-    user-select: none;
-    text-shadow: 0px 0px 6px rgb(0, 0, 0, 0.212);
-    transition: 0.3s;
+  font-family: Roboto Mono;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  user-select: none;
+  text-shadow: 0px 0px 6px rgb(0, 0, 0, 0.212);
+  transition: 0.3s;
 }
 
-.landingCircle:hover + .landingPageText {
-    color: rgba(255, 255, 255, 0.5);
-    text-shadow: 0px 0px 14.1px rgba(213, 213, 213, 0.304);
+.landingCircle:hover+.landingPageText {
+  color: rgba(255, 255, 255, 0.5);
+  text-shadow: 0px 0px 14.1px rgba(213, 213, 213, 0.304);
 }
 
 .cornerContainer {
-    top: 30px;
-    left: 30px;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    color: wheat;
+  top: 30px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  color: wheat;
 }
 
 .mouseXYposition {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .flex_horizontal {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .flex_horizontal_points {
-    display: flex;
-    width: 100%;
-    pointer-events: none;
-    justify-content: space-around;
+  display: flex;
+  width: 100%;
+  pointer-events: none;
+  justify-content: space-around;
 }
 
 .flex_column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space;
+  display: flex;
+  flex-direction: column;
+  justify-content: space;
 }
 
 .lineContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 39vh 11vw;
-    animation: fade-down 1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 39vh 11vw;
+  animation: fade-down 1s;
 }
 
 .dataConnectionLine {
-    background: linear-gradient(
-        47deg,
-        #FFFFFF 0%,
-        #D9D9D9 50%,
-        rgba(144, 144, 144, 0) 100%
-    );
-    border-radius: 5px;
-    /* z-index: -1; */
-    padding: 0px 2px 68px 2px;
-    margin: 90px 0px 0px 0px;
-    position: absolute;
-    transition: 0.25s;
+  background: linear-gradient(47deg,
+      #FFFFFF 0%,
+      #D9D9D9 50%,
+      rgba(144, 144, 144, 0) 100%);
+  border-radius: 5px;
+  /* z-index: -1; */
+  padding: 0px 2px 68px 2px;
+  margin: 90px 0px 0px 0px;
+  position: absolute;
+  transition: 0.25s;
 }
 
 .hoverPointInnerCircle {
-    background-color: #625D5D;
-    padding: 8px;
-    border-radius: 8px;
-    position: absolute;
-    z-index: 0;
-    pointer-events: none;
+  background-color: #625D5D;
+  padding: 8px;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hoverPoint {
-    background: linear-gradient(
-        137deg,
-        #FFFFFF 0%,
-        #D9D9D9 50%,
-        #909090 100%
-    );
-    padding: 12px;
-    border-radius: 12px;
-    margin: -6px 0px 0px -12px;
-    position: absolute;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background: linear-gradient(137deg,
+      #FFFFFF 0%,
+      #D9D9D9 50%,
+      #909090 100%);
+  padding: 12px;
+  border-radius: 12px;
+  margin: -6px 0px 0px -12px;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hoverPoint-onPlace {
-    padding: 12px;
-    position: static;
-    pointer-events: all;
-    cursor: pointer;
-    margin: -16px 0px 0px 0px;
-    animation: fade-up 0.25s;
+  padding: 12px;
+  position: static;
+  pointer-events: all;
+  cursor: pointer;
+  margin: -16px 0px 0px 0px;
+  animation: fade-up 0.25s;
 }
 
 .hoverPoint-onPlace:hover {
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
 }
 
 .hoverPoint-onPlace:hover .dataConnectionLine {
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
 }
 
 .hoverPoint-onClick {
-    padding: 16px;
-    border-radius: 16px;
-    margin: -10px 0px 0px -16px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
-    transition: 0.25s;
+  padding: 16px;
+  border-radius: 16px;
+  margin: -10px 0px 0px -16px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  transition: 0.25s;
 }
 
 .hoverPoint-onClick .hoverPointInnerCircle {
-    padding: 11px;
-    border-radius: 11px;
-    transition: 0.5s;
+  padding: 11px;
+  border-radius: 11px;
+  transition: 0.5s;
 }
 
 .hoverPoint-onClick .dataConnectionLine {
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
-    opacity: 1;
-    animation: fade-down 0.5s;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  animation: fade-down 0.5s;
 }
 
 .hoverPoint-onPlace .dataConnectionLine {
-    background: linear-gradient(
-        133deg,
-        #FFFFFF 0%,
-        #D9D9D9 50%,
-        rgba(144, 144, 144, 0) 100%
-    );
-    padding: 2px 1px 41px 2px;
-    margin: -66px 0px 0px 0px;
-    animation: fade-up 0.5s;
+  background: linear-gradient(133deg,
+      #FFFFFF 0%,
+      #D9D9D9 50%,
+      rgba(144, 144, 144, 0) 100%);
+  padding: 2px 1px 41px 2px;
+  margin: -66px 0px 0px 0px;
+  animation: fade-up 0.5s;
 }
 
 .pointSubmissionContainer {
-    background: linear-gradient(
-        57deg,
-        #BABABA 0%,
-        #B6B6B6 50%,
-        #9E9E9E 100%
-    );
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: absolute;
-    margin: 92px 0px 0px -8px;
-    padding: 15px 20px;
-    width: 376px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 15.5px rgba(0, 0, 0, 0.07);
-    z-index: 1;
-    mix-blend-mode: overlay;
-    backdrop-filter: blur(50px);
-    filter: var(--filterProperties);
-    animation: fade-down 0.25s;
-    transition: 0.5s;
-    transition-behavior: allow-discrete;
+  background: linear-gradient(57deg,
+      #BABABA 0%,
+      #B6B6B6 50%,
+      #9E9E9E 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  margin: 92px 0px 0px -8px;
+  padding: 15px 20px;
+  width: 376px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15.5px rgba(0, 0, 0, 0.07);
+  z-index: 1;
+  mix-blend-mode: overlay;
+  backdrop-filter: blur(50px);
+  filter: var(--filterProperties);
+  animation: fade-down 0.25s;
+  transition: 0.5s;
+  transition-behavior: allow-discrete;
 }
 
-.pointSubmissionContainer input, button {
-    background-color: #D7D7D7;
-    box-shadow: 2px 4px 12.3px rgba(0, 0, 0, 0.10);
-    /* font-family: 'Comfortaa'; */
-    font-weight: 300;
-    font-size: 12px;
+.pointSubmissionContainer input,
+button {
+  background-color: #D7D7D7;
+  box-shadow: 2px 4px 12.3px rgba(0, 0, 0, 0.10);
+  /* font-family: 'Comfortaa'; */
+  font-weight: 300;
+  font-size: 12px;
 }
 
 .placedPointDisplay {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 14px;
-    position: absolute;
-    margin: 0px 0px 178px 0px;
-    animation: fade-down 1s;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 14px;
+  position: absolute;
+  margin: 0px 0px 178px 0px;
+  animation: fade-down 1s;
 }
 
 .pointTitle {
-    font-family: 'Comfortaa';
-    font-weight: 500;
-    font-size: 14px;
-    color: #FFFFFF;
-    pointer-events: none;
-    user-select: none;
+  font-family: 'Comfortaa';
+  font-weight: 500;
+  font-size: 14px;
+  color: #FFFFFF;
+  pointer-events: none;
+  user-select: none;
 }
 
 .pointDescription {
-    font-family: 'Comfortaa';
-    font-weight: 300;
-    font-size: 12px;
-    color: #FFFFFF;
-    pointer-events: none;
-    user-select: none;
+  font-family: 'Comfortaa';
+  font-weight: 300;
+  font-size: 12px;
+  color: #FFFFFF;
+  pointer-events: none;
+  user-select: none;
 }
 
-.submit_button:active, .add-attachment:active {
-    background-color: #868658;
+.submit_button:active,
+.add-attachment:active {
+  background-color: #868658;
 }
 
 .submit_button {
-    padding: 8px 10px 5px 10px;
+  padding: 8px 10px 5px 10px;
 }
 
-.add-attachment, .submit_button {
-    height: 45px;
-    padding: 5px 10px;
-    flex-grow: 1;
+.add-attachment,
+.submit_button {
+  height: 45px;
+  padding: 5px 10px;
+  flex-grow: 1;
 }
 
 .line {
-    background-color: #FFFFFF;
-    height: 10px;
-    width: 100%;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #FFFFFF;
+  height: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .settingsContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    mix-blend-mode: overlay;
-    backdrop-filter: blur(20px);
-    border-radius: 5px;
-    position: absolute;
-    padding: 20px;
-    z-index: 1;
-    animation: fade-down 0.25s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  mix-blend-mode: overlay;
+  backdrop-filter: blur(20px);
+  border-radius: 5px;
+  position: absolute;
+  padding: 20px;
+  z-index: 1;
+  animation: fade-down 0.25s;
 }
 
 .grain {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    pointer-events: none;
-    background: url(https://cdn.shopify.com/s/files/1/0564/7617/2332/files/GrainBackround.gif?v=1667804647);
-    opacity: 0.3;
-    mix-blend-mode: multiply;
-    z-index: 100;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  background: url(https://cdn.shopify.com/s/files/1/0564/7617/2332/files/GrainBackround.gif?v=1667804647);
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+  z-index: 100;
 }
 
 .fadeOut {
-    animation: fadeOutAnimation 0.5s forwards;
+  animation: fadeOutAnimation 0.5s forwards;
 }
 
 .isHidden {
-    display: none;
-    opacity: 0;
+  display: none;
+  opacity: 0;
 }

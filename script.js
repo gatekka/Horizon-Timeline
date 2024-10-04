@@ -22,13 +22,14 @@ const elements = {
   downloadDataButton: document.getElementById('downloadDataButton'),
   settingsContainer: document.getElementById('settingsContainer'),
   inputChangeBackgroundImage: document.getElementById('inputChangeBackgroundImage'),
+  importJsonData: document.getElementById('importJsonData'),
 }
 
 let isKeyboardPlottingActive = false;
 let isEditingPoint = false;
 let isHotkeysEnabled = false;
 
-const dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
+let dataStore = JSON.parse(localStorage.getItem('dataLocalStorage')) || []; // imports from local storage, otherwise creates empty array
 dataStore.sort((a, b) => a.timecode - b.timecode);
 
 elements.description_data.addEventListener('input', e => parseTextToDate(e.target.value));
@@ -324,6 +325,21 @@ function downloadLocalStorageData() {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+}
+
+// elements.inputJsonData.addEventListener('', importLocalStorageData);
+elements.importJsonData.addEventListener('change', importLocalStorageData);
+function importLocalStorageData() {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const fileContent = e.target.result;
+    console.log(fileContent);
+    dataStore = JSON.parse(fileContent);
+    renderPointsFromLocalStorage();
+    localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
+  };
+  reader.readAsText(file)
 }
 
 [elements.titleInput, elements.description_data].forEach(element => {
