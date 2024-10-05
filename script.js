@@ -122,13 +122,16 @@ function renderAllPoints() {
   dataStore.forEach(element => {
     const pointElement = document.getElementById(`point${element.id}`);
     if (element.id != currentSelectedPointId) {
-      // pointElement.style.animation = 'none';
-      // pointElement.querySelector('.placedPointDisplay').style.animation = 'none';
-      // pointElement.querySelector('.dataConnectionLine').style.animation = 'none';
       disableAnimations(pointElement)
     }
     elements.flex_horizontal_points.appendChild(pointElement);
   });
+}
+
+function removeAllChildenOfElement(div) {
+  while (div.firstChild) {
+    div.removeChild(div.firstChild);
+  }
 }
 
 function restoreAnimations(element) {
@@ -245,7 +248,7 @@ function placePointOnLine(title, description) {
 
 let unfocusedPoint = true;
 document.addEventListener('click', unfocusElement)
-function unfocusElement() {
+function unfocusElement(event) {
   const checkUnfocusedElementsFor = [
     elements.line,
     elements.pointSubmissionContainer,
@@ -266,7 +269,7 @@ elements.line.onmouseover = function displayPoint() {
   elements.hoverPoint.classList.remove('isHidden');
 }
 
-elements.line.onmouseleave = function onMouseLeave(event) {
+elements.line.onmouseleave = function onMouseLeave() {
   if (clickedOnLine == false) {
     elements.hoverPoint.classList.add('isHidden');
   }
@@ -329,13 +332,14 @@ function downloadLocalStorageData() {
 
 // elements.inputJsonData.addEventListener('', importLocalStorageData);
 elements.importJsonData.addEventListener('change', importLocalStorageData);
-function importLocalStorageData() {
+function importLocalStorageData(event) {
   const file = event.target.files[0];
   const reader = new FileReader();
   reader.onload = (e) => {
     const fileContent = e.target.result;
-    console.log(fileContent);
+    console.log(JSON.parse(fileContent));
     dataStore = JSON.parse(fileContent);
+    removeAllChildenOfElement(elements.flex_horizontal_points);
     renderPointsFromLocalStorage();
     localStorage.setItem('dataLocalStorage', JSON.stringify(dataStore)); // serializes the array and stores in local storage
   };
@@ -394,7 +398,7 @@ window.addEventListener('keydown', (event) => {
         isKeyboardPlottingActive = true;
         showSubmissionContainer();
         break;
-      case '?':
+      case '`':
         //TODO: Open settings context menu
         console.log('Open settings context menu');
         settingsContainer.classList.remove('isHidden');
